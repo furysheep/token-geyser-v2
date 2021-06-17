@@ -4,10 +4,13 @@ import '@nomiclabs/hardhat-waffle'
 import '@openzeppelin/hardhat-upgrades'
 import 'hardhat-gas-reporter'
 import 'solidity-coverage'
-
+import { resolve } from "path";
 import { Contract, Signer, Wallet } from 'ethers'
 import { mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { HardhatUserConfig, task } from 'hardhat/config'
+import { config as dotenvConfig } from "dotenv";
+
+dotenvConfig({ path: resolve(__dirname, "./.env") });
 
 async function deployContract(
   name: string,
@@ -33,10 +36,10 @@ async function createInstance(
   // get contract class
   const instance = await getContractAt(
     instanceName,
-    await factory.connect(signer).callStatic['create(bytes)'](args),
+    await factory.connect(await signer.getAddress()).callStatic['create(bytes)'](args),
   )
   // deploy vault
-  const tx = await factory.connect(signer)['create(bytes)'](args)
+  const tx = await factory.connect(await signer.getAddress())['create(bytes)'](args)
   // return contract class
   console.log('Deploying', instanceName)
   console.log('  to', instance.address)
@@ -57,33 +60,33 @@ task('deploy', 'deploy full set of factory contracts').setAction(
     const PowerSwitchFactory = await deployContract(
       'PowerSwitchFactory',
       ethers.getContractFactory,
-      signer,
+      signer as Signer,
     )
     const RewardPoolFactory = await deployContract(
       'RewardPoolFactory',
       ethers.getContractFactory,
-      signer,
+      signer as Signer,
     )
     const UniversalVault = await deployContract(
       'UniversalVault',
       ethers.getContractFactory,
-      signer,
+      signer as Signer,
     )
     const VaultFactory = await deployContract(
       'VaultFactory',
       ethers.getContractFactory,
-      signer,
+      signer as Signer,
       [UniversalVault.address],
     )
     const GeyserRegistry = await deployContract(
       'GeyserRegistry',
       ethers.getContractFactory,
-      signer,
+      signer as Signer,
     )
     const RouterV1 = await deployContract(
       'RouterV1',
       ethers.getContractFactory,
-      signer,
+      signer as Signer,
     )
 
     console.log('Locking template')
@@ -171,14 +174,14 @@ task('create-vault', 'deploy an instance of UniversalVault')
     const vaultFactory = await ethers.getContractAt(
       'VaultFactory',
       VaultFactory,
-      signer,
+      signer as Signer,
     )
 
     await createInstance(
       'UniversalVault',
       vaultFactory,
       ethers.getContractAt,
-      signer,
+      signer as Signer,
     )
   })
 
@@ -220,7 +223,7 @@ task('create-geyser', 'deploy an instance of Geyser')
         [floor, ceiling, time],
       ] as Array<any>
 
-      const factory = await ethers.getContractFactory('Geyser', signer)
+      const factory = await ethers.getContractFactory('Geyser', signer as Signer)
       const geyser = await upgrades.deployProxy(factory, args, {
         unsafeAllowCustomTypes: true,
       })
@@ -243,7 +246,7 @@ task('create-geyser', 'deploy an instance of Geyser')
       const geyserRegistry = await ethers.getContractAt(
         'GeyserRegistry',
         GeyserRegistry,
-        signer,
+        signer as Signer,
       )
 
       await geyserRegistry.register(geyser.address)
@@ -264,7 +267,7 @@ task('verify-geyser', 'verify and lock the Geyser template')
     const contract = await ethers.getContractAt(
       'Geyser',
       geyserTemplate,
-      signer,
+      signer as Signer,
     )
 
     console.log('Locking template')
@@ -290,8 +293,8 @@ export default {
           process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
       },
     },
-    kovan: {
-      url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
+    rinkeby: {
+      url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_ID,
       accounts: {
         mnemonic:
           process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
