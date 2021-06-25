@@ -10,7 +10,7 @@ import { Contract, Signer, Wallet } from 'ethers'
 import { mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { HardhatUserConfig, task } from 'hardhat/config'
 import { config as dotenvConfig } from 'dotenv'
-import { VaultFactory } from './typechain';
+import { VaultFactory } from './typechain'
 
 dotenvConfig({ path: resolve(__dirname, './.env') })
 
@@ -35,7 +35,7 @@ async function createInstance(
   signer: Signer,
   args: string = '0x',
 ) {
-  console.log(instanceName, signer, args, factory.address);
+  console.log(instanceName, signer, args, factory.address)
   // get contract class
   const instance = await getContractAt(
     instanceName,

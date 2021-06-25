@@ -2,17 +2,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers'
+import { Provider } from '@ethersproject/providers'
 
-import type { IInstanceRegistry } from "../IInstanceRegistry";
+import type { IInstanceRegistry } from '../IInstanceRegistry'
 
 export class IInstanceRegistry__factory {
   static connect(
     address: string,
-    signerOrProvider: Signer | Provider
+    signerOrProvider: Signer | Provider,
   ): IInstanceRegistry {
-    return new Contract(address, _abi, signerOrProvider) as IInstanceRegistry;
+    return new Contract(address, _abi, signerOrProvider) as IInstanceRegistry
   }
 }
 
@@ -22,76 +22,76 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "address",
-        name: "instance",
-        type: "address",
+        internalType: 'address',
+        name: 'instance',
+        type: 'address',
       },
     ],
-    name: "InstanceAdded",
-    type: "event",
+    name: 'InstanceAdded',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: false,
-        internalType: "address",
-        name: "instance",
-        type: "address",
+        internalType: 'address',
+        name: 'instance',
+        type: 'address',
       },
     ],
-    name: "InstanceRemoved",
-    type: "event",
+    name: 'InstanceRemoved',
+    type: 'event',
   },
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "index",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'index',
+        type: 'uint256',
       },
     ],
-    name: "instanceAt",
+    name: 'instanceAt',
     outputs: [
       {
-        internalType: "address",
-        name: "instance",
-        type: "address",
+        internalType: 'address',
+        name: 'instance',
+        type: 'address',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [],
-    name: "instanceCount",
+    name: 'instanceCount',
     outputs: [
       {
-        internalType: "uint256",
-        name: "count",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'count',
+        type: 'uint256',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "instance",
-        type: "address",
+        internalType: 'address',
+        name: 'instance',
+        type: 'address',
       },
     ],
-    name: "isInstance",
+    name: 'isInstance',
     outputs: [
       {
-        internalType: "bool",
-        name: "validity",
-        type: "bool",
+        internalType: 'bool',
+        name: 'validity',
+        type: 'bool',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
-];
+]

@@ -9,97 +9,97 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
+} from 'ethers'
 import {
   Contract,
   ContractTransaction,
   CallOverrides,
-} from "@ethersproject/contracts";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+} from '@ethersproject/contracts'
+import { BytesLike } from '@ethersproject/bytes'
+import { Listener, Provider } from '@ethersproject/providers'
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
 
 interface OwnableERC721Interface extends ethers.utils.Interface {
   functions: {
-    "nft()": FunctionFragment;
-    "owner()": FunctionFragment;
-  };
+    'nft()': FunctionFragment
+    'owner()': FunctionFragment
+  }
 
-  encodeFunctionData(functionFragment: "nft", values?: undefined): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: 'nft', values?: undefined): string
+  encodeFunctionData(functionFragment: 'owner', values?: undefined): string
 
-  decodeFunctionResult(functionFragment: "nft", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'nft', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result
 
-  events: {};
+  events: {}
 }
 
 export class OwnableERC721 extends Contract {
-  connect(signerOrProvider: Signer | Provider | string): this;
-  attach(addressOrName: string): this;
-  deployed(): Promise<this>;
+  connect(signerOrProvider: Signer | Provider | string): this
+  attach(addressOrName: string): this
+  deployed(): Promise<this>
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  on(event: EventFilter | string, listener: Listener): this
+  once(event: EventFilter | string, listener: Listener): this
+  addListener(eventName: EventFilter | string, listener: Listener): this
+  removeAllListeners(eventName: EventFilter | string): this
+  removeListener(eventName: any, listener: Listener): this
 
-  interface: OwnableERC721Interface;
+  interface: OwnableERC721Interface
 
   functions: {
-    nft(overrides?: CallOverrides): Promise<[string] & { nftAddress: string }>;
+    nft(overrides?: CallOverrides): Promise<[string] & { nftAddress: string }>
 
-    "nft()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { nftAddress: string }>;
+    'nft()'(
+      overrides?: CallOverrides,
+    ): Promise<[string] & { nftAddress: string }>
 
     owner(
-      overrides?: CallOverrides
-    ): Promise<[string] & { ownerAddress: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { ownerAddress: string }>
 
-    "owner()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { ownerAddress: string }>;
-  };
+    'owner()'(
+      overrides?: CallOverrides,
+    ): Promise<[string] & { ownerAddress: string }>
+  }
 
-  nft(overrides?: CallOverrides): Promise<string>;
+  nft(overrides?: CallOverrides): Promise<string>
 
-  "nft()"(overrides?: CallOverrides): Promise<string>;
+  'nft()'(overrides?: CallOverrides): Promise<string>
 
-  owner(overrides?: CallOverrides): Promise<string>;
+  owner(overrides?: CallOverrides): Promise<string>
 
-  "owner()"(overrides?: CallOverrides): Promise<string>;
+  'owner()'(overrides?: CallOverrides): Promise<string>
 
   callStatic: {
-    nft(overrides?: CallOverrides): Promise<string>;
+    nft(overrides?: CallOverrides): Promise<string>
 
-    "nft()"(overrides?: CallOverrides): Promise<string>;
+    'nft()'(overrides?: CallOverrides): Promise<string>
 
-    owner(overrides?: CallOverrides): Promise<string>;
+    owner(overrides?: CallOverrides): Promise<string>
 
-    "owner()"(overrides?: CallOverrides): Promise<string>;
-  };
+    'owner()'(overrides?: CallOverrides): Promise<string>
+  }
 
-  filters: {};
+  filters: {}
 
   estimateGas: {
-    nft(overrides?: CallOverrides): Promise<BigNumber>;
+    nft(overrides?: CallOverrides): Promise<BigNumber>
 
-    "nft()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'nft()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
+    owner(overrides?: CallOverrides): Promise<BigNumber>
 
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
-  };
+    'owner()'(overrides?: CallOverrides): Promise<BigNumber>
+  }
 
   populateTransaction: {
-    nft(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    nft(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "nft()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'nft()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-  };
+    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
+  }
 }

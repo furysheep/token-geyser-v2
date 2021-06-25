@@ -2,17 +2,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers'
+import { Provider } from '@ethersproject/providers'
 
-import type { ERC1271 } from "../ERC1271";
+import type { ERC1271 } from '../ERC1271'
 
 export class ERC1271__factory {
   static connect(
     address: string,
-    signerOrProvider: Signer | Provider
+    signerOrProvider: Signer | Provider,
   ): ERC1271 {
-    return new Contract(address, _abi, signerOrProvider) as ERC1271;
+    return new Contract(address, _abi, signerOrProvider) as ERC1271
   }
 }
 
@@ -20,25 +20,25 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "bytes32",
-        name: "permissionHash",
-        type: "bytes32",
+        internalType: 'bytes32',
+        name: 'permissionHash',
+        type: 'bytes32',
       },
       {
-        internalType: "bytes",
-        name: "signature",
-        type: "bytes",
+        internalType: 'bytes',
+        name: 'signature',
+        type: 'bytes',
       },
     ],
-    name: "isValidSignature",
+    name: 'isValidSignature',
     outputs: [
       {
-        internalType: "bytes4",
-        name: "",
-        type: "bytes4",
+        internalType: 'bytes4',
+        name: '',
+        type: 'bytes4',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
-];
+]

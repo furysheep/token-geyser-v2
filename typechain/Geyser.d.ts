@@ -9,456 +9,447 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
+} from 'ethers'
 import {
   Contract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+} from '@ethersproject/contracts'
+import { BytesLike } from '@ethersproject/bytes'
+import { Listener, Provider } from '@ethersproject/providers'
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
 
 interface GeyserInterface extends ethers.utils.Interface {
   functions: {
-    "BASE_SHARES_PER_WEI()": FunctionFragment;
-    "MAX_REWARD_TOKENS()": FunctionFragment;
-    "MAX_STAKES_PER_VAULT()": FunctionFragment;
-    "calculateReward(uint256,uint256,uint256,uint256,tuple)": FunctionFragment;
-    "calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)": FunctionFragment;
-    "calculateStakeUnits(uint256,uint256,uint256)": FunctionFragment;
-    "calculateTotalStakeUnits(tuple[],uint256)": FunctionFragment;
-    "calculateUnlockedRewards(tuple[],uint256,uint256,uint256)": FunctionFragment;
-    "fundGeyser(uint256,uint256)": FunctionFragment;
-    "getBonusTokenAtIndex(uint256)": FunctionFragment;
-    "getBonusTokenSetLength()": FunctionFragment;
-    "getCurrentStakeReward(address,uint256)": FunctionFragment;
-    "getCurrentTotalStakeUnits()": FunctionFragment;
-    "getCurrentUnlockedRewards()": FunctionFragment;
-    "getCurrentVaultReward(address)": FunctionFragment;
-    "getCurrentVaultStakeUnits(address)": FunctionFragment;
-    "getFutureStakeReward(address,uint256,uint256)": FunctionFragment;
-    "getFutureTotalStakeUnits(uint256)": FunctionFragment;
-    "getFutureUnlockedRewards(uint256)": FunctionFragment;
-    "getFutureVaultReward(address,uint256)": FunctionFragment;
-    "getFutureVaultStakeUnits(address,uint256)": FunctionFragment;
-    "getGeyserData()": FunctionFragment;
-    "getPowerController()": FunctionFragment;
-    "getPowerSwitch()": FunctionFragment;
-    "getVaultData(address)": FunctionFragment;
-    "getVaultFactoryAtIndex(uint256)": FunctionFragment;
-    "getVaultFactorySetLength()": FunctionFragment;
-    "initialize(address,address,address,address,address,tuple)": FunctionFragment;
-    "initializeLock()": FunctionFragment;
-    "isOffline()": FunctionFragment;
-    "isOnline()": FunctionFragment;
-    "isShutdown()": FunctionFragment;
-    "isValidAddress(address)": FunctionFragment;
-    "isValidVault(address)": FunctionFragment;
-    "owner()": FunctionFragment;
-    "rageQuit()": FunctionFragment;
-    "registerBonusToken(address)": FunctionFragment;
-    "registerVaultFactory(address)": FunctionFragment;
-    "removeVaultFactory(address)": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
-    "rescueTokensFromRewardPool(address,address,uint256)": FunctionFragment;
-    "stake(address,uint256,bytes)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
-    "unstakeAndClaim(address,uint256,bytes)": FunctionFragment;
-  };
+    'BASE_SHARES_PER_WEI()': FunctionFragment
+    'MAX_REWARD_TOKENS()': FunctionFragment
+    'MAX_STAKES_PER_VAULT()': FunctionFragment
+    'calculateReward(uint256,uint256,uint256,uint256,tuple)': FunctionFragment
+    'calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)': FunctionFragment
+    'calculateStakeUnits(uint256,uint256,uint256)': FunctionFragment
+    'calculateTotalStakeUnits(tuple[],uint256)': FunctionFragment
+    'calculateUnlockedRewards(tuple[],uint256,uint256,uint256)': FunctionFragment
+    'fundGeyser(uint256,uint256)': FunctionFragment
+    'getBonusTokenAtIndex(uint256)': FunctionFragment
+    'getBonusTokenSetLength()': FunctionFragment
+    'getCurrentStakeReward(address,uint256)': FunctionFragment
+    'getCurrentTotalStakeUnits()': FunctionFragment
+    'getCurrentUnlockedRewards()': FunctionFragment
+    'getCurrentVaultReward(address)': FunctionFragment
+    'getCurrentVaultStakeUnits(address)': FunctionFragment
+    'getFutureStakeReward(address,uint256,uint256)': FunctionFragment
+    'getFutureTotalStakeUnits(uint256)': FunctionFragment
+    'getFutureUnlockedRewards(uint256)': FunctionFragment
+    'getFutureVaultReward(address,uint256)': FunctionFragment
+    'getFutureVaultStakeUnits(address,uint256)': FunctionFragment
+    'getGeyserData()': FunctionFragment
+    'getPowerController()': FunctionFragment
+    'getPowerSwitch()': FunctionFragment
+    'getVaultData(address)': FunctionFragment
+    'getVaultFactoryAtIndex(uint256)': FunctionFragment
+    'getVaultFactorySetLength()': FunctionFragment
+    'initialize(address,address,address,address,address,tuple)': FunctionFragment
+    'initializeLock()': FunctionFragment
+    'isOffline()': FunctionFragment
+    'isOnline()': FunctionFragment
+    'isShutdown()': FunctionFragment
+    'isValidAddress(address)': FunctionFragment
+    'isValidVault(address)': FunctionFragment
+    'owner()': FunctionFragment
+    'rageQuit()': FunctionFragment
+    'registerBonusToken(address)': FunctionFragment
+    'registerVaultFactory(address)': FunctionFragment
+    'removeVaultFactory(address)': FunctionFragment
+    'renounceOwnership()': FunctionFragment
+    'rescueTokensFromRewardPool(address,address,uint256)': FunctionFragment
+    'stake(address,uint256,bytes)': FunctionFragment
+    'transferOwnership(address)': FunctionFragment
+    'unstakeAndClaim(address,uint256,bytes)': FunctionFragment
+  }
 
   encodeFunctionData(
-    functionFragment: "BASE_SHARES_PER_WEI",
-    values?: undefined
-  ): string;
+    functionFragment: 'BASE_SHARES_PER_WEI',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "MAX_REWARD_TOKENS",
-    values?: undefined
-  ): string;
+    functionFragment: 'MAX_REWARD_TOKENS',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "MAX_STAKES_PER_VAULT",
-    values?: undefined
-  ): string;
+    functionFragment: 'MAX_STAKES_PER_VAULT',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "calculateReward",
+    functionFragment: 'calculateReward',
     values: [
       BigNumberish,
       BigNumberish,
       BigNumberish,
       BigNumberish,
-      { floor: BigNumberish; ceiling: BigNumberish; time: BigNumberish }
-    ]
-  ): string;
+      { floor: BigNumberish; ceiling: BigNumberish; time: BigNumberish },
+    ],
+  ): string
   encodeFunctionData(
-    functionFragment: "calculateRewardFromStakes",
+    functionFragment: 'calculateRewardFromStakes',
     values: [
       { amount: BigNumberish; timestamp: BigNumberish }[],
       BigNumberish,
       BigNumberish,
       BigNumberish,
       BigNumberish,
-      { floor: BigNumberish; ceiling: BigNumberish; time: BigNumberish }
-    ]
-  ): string;
+      { floor: BigNumberish; ceiling: BigNumberish; time: BigNumberish },
+    ],
+  ): string
   encodeFunctionData(
-    functionFragment: "calculateStakeUnits",
-    values: [BigNumberish, BigNumberish, BigNumberish]
-  ): string;
+    functionFragment: 'calculateStakeUnits',
+    values: [BigNumberish, BigNumberish, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "calculateTotalStakeUnits",
-    values: [{ amount: BigNumberish; timestamp: BigNumberish }[], BigNumberish]
-  ): string;
+    functionFragment: 'calculateTotalStakeUnits',
+    values: [{ amount: BigNumberish; timestamp: BigNumberish }[], BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "calculateUnlockedRewards",
+    functionFragment: 'calculateUnlockedRewards',
     values: [
       { duration: BigNumberish; start: BigNumberish; shares: BigNumberish }[],
       BigNumberish,
       BigNumberish,
-      BigNumberish
-    ]
-  ): string;
+      BigNumberish,
+    ],
+  ): string
   encodeFunctionData(
-    functionFragment: "fundGeyser",
-    values: [BigNumberish, BigNumberish]
-  ): string;
+    functionFragment: 'fundGeyser',
+    values: [BigNumberish, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getBonusTokenAtIndex",
-    values: [BigNumberish]
-  ): string;
+    functionFragment: 'getBonusTokenAtIndex',
+    values: [BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getBonusTokenSetLength",
-    values?: undefined
-  ): string;
+    functionFragment: 'getBonusTokenSetLength',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "getCurrentStakeReward",
-    values: [string, BigNumberish]
-  ): string;
+    functionFragment: 'getCurrentStakeReward',
+    values: [string, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getCurrentTotalStakeUnits",
-    values?: undefined
-  ): string;
+    functionFragment: 'getCurrentTotalStakeUnits',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "getCurrentUnlockedRewards",
-    values?: undefined
-  ): string;
+    functionFragment: 'getCurrentUnlockedRewards',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "getCurrentVaultReward",
-    values: [string]
-  ): string;
+    functionFragment: 'getCurrentVaultReward',
+    values: [string],
+  ): string
   encodeFunctionData(
-    functionFragment: "getCurrentVaultStakeUnits",
-    values: [string]
-  ): string;
+    functionFragment: 'getCurrentVaultStakeUnits',
+    values: [string],
+  ): string
   encodeFunctionData(
-    functionFragment: "getFutureStakeReward",
-    values: [string, BigNumberish, BigNumberish]
-  ): string;
+    functionFragment: 'getFutureStakeReward',
+    values: [string, BigNumberish, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getFutureTotalStakeUnits",
-    values: [BigNumberish]
-  ): string;
+    functionFragment: 'getFutureTotalStakeUnits',
+    values: [BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getFutureUnlockedRewards",
-    values: [BigNumberish]
-  ): string;
+    functionFragment: 'getFutureUnlockedRewards',
+    values: [BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getFutureVaultReward",
-    values: [string, BigNumberish]
-  ): string;
+    functionFragment: 'getFutureVaultReward',
+    values: [string, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getFutureVaultStakeUnits",
-    values: [string, BigNumberish]
-  ): string;
+    functionFragment: 'getFutureVaultStakeUnits',
+    values: [string, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getGeyserData",
-    values?: undefined
-  ): string;
+    functionFragment: 'getGeyserData',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "getPowerController",
-    values?: undefined
-  ): string;
+    functionFragment: 'getPowerController',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "getPowerSwitch",
-    values?: undefined
-  ): string;
+    functionFragment: 'getPowerSwitch',
+    values?: undefined,
+  ): string
+  encodeFunctionData(functionFragment: 'getVaultData', values: [string]): string
   encodeFunctionData(
-    functionFragment: "getVaultData",
-    values: [string]
-  ): string;
+    functionFragment: 'getVaultFactoryAtIndex',
+    values: [BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "getVaultFactoryAtIndex",
-    values: [BigNumberish]
-  ): string;
+    functionFragment: 'getVaultFactorySetLength',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "getVaultFactorySetLength",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initialize",
+    functionFragment: 'initialize',
     values: [
       string,
       string,
       string,
       string,
       string,
-      { floor: BigNumberish; ceiling: BigNumberish; time: BigNumberish }
-    ]
-  ): string;
+      { floor: BigNumberish; ceiling: BigNumberish; time: BigNumberish },
+    ],
+  ): string
   encodeFunctionData(
-    functionFragment: "initializeLock",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "isOffline", values?: undefined): string;
-  encodeFunctionData(functionFragment: "isOnline", values?: undefined): string;
+    functionFragment: 'initializeLock',
+    values?: undefined,
+  ): string
+  encodeFunctionData(functionFragment: 'isOffline', values?: undefined): string
+  encodeFunctionData(functionFragment: 'isOnline', values?: undefined): string
+  encodeFunctionData(functionFragment: 'isShutdown', values?: undefined): string
   encodeFunctionData(
-    functionFragment: "isShutdown",
-    values?: undefined
-  ): string;
+    functionFragment: 'isValidAddress',
+    values: [string],
+  ): string
+  encodeFunctionData(functionFragment: 'isValidVault', values: [string]): string
+  encodeFunctionData(functionFragment: 'owner', values?: undefined): string
+  encodeFunctionData(functionFragment: 'rageQuit', values?: undefined): string
   encodeFunctionData(
-    functionFragment: "isValidAddress",
-    values: [string]
-  ): string;
+    functionFragment: 'registerBonusToken',
+    values: [string],
+  ): string
   encodeFunctionData(
-    functionFragment: "isValidVault",
-    values: [string]
-  ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "rageQuit", values?: undefined): string;
+    functionFragment: 'registerVaultFactory',
+    values: [string],
+  ): string
   encodeFunctionData(
-    functionFragment: "registerBonusToken",
-    values: [string]
-  ): string;
+    functionFragment: 'removeVaultFactory',
+    values: [string],
+  ): string
   encodeFunctionData(
-    functionFragment: "registerVaultFactory",
-    values: [string]
-  ): string;
+    functionFragment: 'renounceOwnership',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "removeVaultFactory",
-    values: [string]
-  ): string;
+    functionFragment: 'rescueTokensFromRewardPool',
+    values: [string, string, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
+    functionFragment: 'stake',
+    values: [string, BigNumberish, BytesLike],
+  ): string
   encodeFunctionData(
-    functionFragment: "rescueTokensFromRewardPool",
-    values: [string, string, BigNumberish]
-  ): string;
+    functionFragment: 'transferOwnership',
+    values: [string],
+  ): string
   encodeFunctionData(
-    functionFragment: "stake",
-    values: [string, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "unstakeAndClaim",
-    values: [string, BigNumberish, BytesLike]
-  ): string;
+    functionFragment: 'unstakeAndClaim',
+    values: [string, BigNumberish, BytesLike],
+  ): string
 
   decodeFunctionResult(
-    functionFragment: "BASE_SHARES_PER_WEI",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'BASE_SHARES_PER_WEI',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "MAX_REWARD_TOKENS",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'MAX_REWARD_TOKENS',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "MAX_STAKES_PER_VAULT",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'MAX_STAKES_PER_VAULT',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "calculateReward",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'calculateReward',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "calculateRewardFromStakes",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'calculateRewardFromStakes',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "calculateStakeUnits",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'calculateStakeUnits',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "calculateTotalStakeUnits",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'calculateTotalStakeUnits',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "calculateUnlockedRewards",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "fundGeyser", data: BytesLike): Result;
+    functionFragment: 'calculateUnlockedRewards',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'fundGeyser', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "getBonusTokenAtIndex",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getBonusTokenAtIndex',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getBonusTokenSetLength",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getBonusTokenSetLength',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getCurrentStakeReward",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getCurrentStakeReward',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getCurrentTotalStakeUnits",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getCurrentTotalStakeUnits',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getCurrentUnlockedRewards",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getCurrentUnlockedRewards',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getCurrentVaultReward",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getCurrentVaultReward',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getCurrentVaultStakeUnits",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getCurrentVaultStakeUnits',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getFutureStakeReward",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getFutureStakeReward',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getFutureTotalStakeUnits",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getFutureTotalStakeUnits',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getFutureUnlockedRewards",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getFutureUnlockedRewards',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getFutureVaultReward",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getFutureVaultReward',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getFutureVaultStakeUnits",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getFutureVaultStakeUnits',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getGeyserData",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getGeyserData',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getPowerController",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getPowerController',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getPowerSwitch",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getPowerSwitch',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getVaultData",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getVaultData',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getVaultFactoryAtIndex",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getVaultFactoryAtIndex',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getVaultFactorySetLength",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+    functionFragment: 'getVaultFactorySetLength',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "initializeLock",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "isOffline", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isOnline", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isShutdown", data: BytesLike): Result;
+    functionFragment: 'initializeLock',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'isOffline', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'isOnline', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'isShutdown', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "isValidAddress",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'isValidAddress',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "isValidVault",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "rageQuit", data: BytesLike): Result;
+    functionFragment: 'isValidVault',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'rageQuit', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "registerBonusToken",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'registerBonusToken',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "registerVaultFactory",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'registerVaultFactory',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "removeVaultFactory",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'removeVaultFactory',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'renounceOwnership',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "rescueTokensFromRewardPool",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "stake", data: BytesLike): Result;
+    functionFragment: 'rescueTokensFromRewardPool',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'stake', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'transferOwnership',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "unstakeAndClaim",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'unstakeAndClaim',
+    data: BytesLike,
+  ): Result
 
   events: {
-    "BonusTokenRegistered(address)": EventFragment;
-    "GeyserCreated(address,address)": EventFragment;
-    "GeyserFunded(uint256,uint256)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
-    "RewardClaimed(address,address,uint256)": EventFragment;
-    "Staked(address,uint256)": EventFragment;
-    "Unstaked(address,uint256)": EventFragment;
-    "VaultFactoryRegistered(address)": EventFragment;
-    "VaultFactoryRemoved(address)": EventFragment;
-  };
+    'BonusTokenRegistered(address)': EventFragment
+    'GeyserCreated(address,address)': EventFragment
+    'GeyserFunded(uint256,uint256)': EventFragment
+    'OwnershipTransferred(address,address)': EventFragment
+    'RewardClaimed(address,address,uint256)': EventFragment
+    'Staked(address,uint256)': EventFragment
+    'Unstaked(address,uint256)': EventFragment
+    'VaultFactoryRegistered(address)': EventFragment
+    'VaultFactoryRemoved(address)': EventFragment
+  }
 
-  getEvent(nameOrSignatureOrTopic: "BonusTokenRegistered"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "GeyserCreated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "GeyserFunded"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "RewardClaimed"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Staked"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Unstaked"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "VaultFactoryRegistered"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "VaultFactoryRemoved"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'BonusTokenRegistered'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'GeyserCreated'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'GeyserFunded'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'RewardClaimed'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'Staked'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'Unstaked'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'VaultFactoryRegistered'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'VaultFactoryRemoved'): EventFragment
 }
 
 export class Geyser extends Contract {
-  connect(signerOrProvider: Signer | Provider | string): this;
-  attach(addressOrName: string): this;
-  deployed(): Promise<this>;
+  connect(signerOrProvider: Signer | Provider | string): this
+  attach(addressOrName: string): this
+  deployed(): Promise<this>
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  on(event: EventFilter | string, listener: Listener): this
+  once(event: EventFilter | string, listener: Listener): this
+  addListener(eventName: EventFilter | string, listener: Listener): this
+  removeAllListeners(eventName: EventFilter | string): this
+  removeListener(eventName: any, listener: Listener): this
 
-  interface: GeyserInterface;
+  interface: GeyserInterface
 
   functions: {
-    BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<[BigNumber]>;
+    BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<[BigNumber]>
 
-    "BASE_SHARES_PER_WEI()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'BASE_SHARES_PER_WEI()'(overrides?: CallOverrides): Promise<[BigNumber]>
 
-    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<[BigNumber]>;
+    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<[BigNumber]>
 
-    "MAX_REWARD_TOKENS()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'MAX_REWARD_TOKENS()'(overrides?: CallOverrides): Promise<[BigNumber]>
 
-    MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<[BigNumber]>;
+    MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<[BigNumber]>
 
-    "MAX_STAKES_PER_VAULT()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'MAX_STAKES_PER_VAULT()'(overrides?: CallOverrides): Promise<[BigNumber]>
 
     calculateReward(
       unlockedRewards: BigNumberish,
@@ -466,25 +457,25 @@ export class Geyser extends Contract {
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
-    "calculateReward(uint256,uint256,uint256,uint256,tuple)"(
+    'calculateReward(uint256,uint256,uint256,uint256,tuple)'(
       unlockedRewards: BigNumberish,
       stakeAmount: BigNumberish,
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
     calculateRewardFromStakes(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
@@ -493,247 +484,247 @@ export class Geyser extends Contract {
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         [BigNumber, BigNumber, BigNumber, BigNumber] & {
-          lastStakeAmount: BigNumber;
-          newStakesCount: BigNumber;
-          reward: BigNumber;
-          newTotalStakeUnits: BigNumber;
-        }
+          lastStakeAmount: BigNumber
+          newStakesCount: BigNumber
+          reward: BigNumber
+          newTotalStakeUnits: BigNumber
+        },
       ] & {
         out: [BigNumber, BigNumber, BigNumber, BigNumber] & {
-          lastStakeAmount: BigNumber;
-          newStakesCount: BigNumber;
-          reward: BigNumber;
-          newTotalStakeUnits: BigNumber;
-        };
+          lastStakeAmount: BigNumber
+          newStakesCount: BigNumber
+          reward: BigNumber
+          newTotalStakeUnits: BigNumber
+        }
       }
-    >;
+    >
 
-    "calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)"(
+    'calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       unstakeAmount: BigNumberish,
       unlockedRewards: BigNumberish,
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         [BigNumber, BigNumber, BigNumber, BigNumber] & {
-          lastStakeAmount: BigNumber;
-          newStakesCount: BigNumber;
-          reward: BigNumber;
-          newTotalStakeUnits: BigNumber;
-        }
+          lastStakeAmount: BigNumber
+          newStakesCount: BigNumber
+          reward: BigNumber
+          newTotalStakeUnits: BigNumber
+        },
       ] & {
         out: [BigNumber, BigNumber, BigNumber, BigNumber] & {
-          lastStakeAmount: BigNumber;
-          newStakesCount: BigNumber;
-          reward: BigNumber;
-          newTotalStakeUnits: BigNumber;
-        };
+          lastStakeAmount: BigNumber
+          newStakesCount: BigNumber
+          reward: BigNumber
+          newTotalStakeUnits: BigNumber
+        }
       }
-    >;
+    >
 
     calculateStakeUnits(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>
 
-    "calculateStakeUnits(uint256,uint256,uint256)"(
+    'calculateStakeUnits(uint256,uint256,uint256)'(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>
 
     calculateTotalStakeUnits(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>
 
-    "calculateTotalStakeUnits(tuple[],uint256)"(
+    'calculateTotalStakeUnits(tuple[],uint256)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>
 
     calculateUnlockedRewards(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>
 
-    "calculateUnlockedRewards(tuple[],uint256,uint256,uint256)"(
+    'calculateUnlockedRewards(tuple[],uint256,uint256,uint256)'(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>
 
     fundGeyser(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "fundGeyser(uint256,uint256)"(
+    'fundGeyser(uint256,uint256)'(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     getBonusTokenAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string] & { bonusToken: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { bonusToken: string }>
 
-    "getBonusTokenAtIndex(uint256)"(
+    'getBonusTokenAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string] & { bonusToken: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { bonusToken: string }>
 
     getBonusTokenSetLength(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { length: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { length: BigNumber }>
 
-    "getBonusTokenSetLength()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { length: BigNumber }>;
+    'getBonusTokenSetLength()'(
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { length: BigNumber }>
 
     getCurrentStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
-    "getCurrentStakeReward(address,uint256)"(
+    'getCurrentStakeReward(address,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
     getCurrentTotalStakeUnits(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>
 
-    "getCurrentTotalStakeUnits()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>;
+    'getCurrentTotalStakeUnits()'(
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>
 
     getCurrentUnlockedRewards(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>
 
-    "getCurrentUnlockedRewards()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>;
+    'getCurrentUnlockedRewards()'(
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>
 
     getCurrentVaultReward(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
-    "getCurrentVaultReward(address)"(
+    'getCurrentVaultReward(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
     getCurrentVaultStakeUnits(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>
 
-    "getCurrentVaultStakeUnits(address)"(
+    'getCurrentVaultStakeUnits(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>
 
     getFutureStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
-    "getFutureStakeReward(address,uint256,uint256)"(
+    'getFutureStakeReward(address,uint256,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
     getFutureTotalStakeUnits(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>
 
-    "getFutureTotalStakeUnits(uint256)"(
+    'getFutureTotalStakeUnits(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { totalStakeUnits: BigNumber }>
 
     getFutureUnlockedRewards(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>
 
-    "getFutureUnlockedRewards(uint256)"(
+    'getFutureUnlockedRewards(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { unlockedRewards: BigNumber }>
 
     getFutureVaultReward(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
-    "getFutureVaultReward(address,uint256)"(
+    'getFutureVaultReward(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { reward: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { reward: BigNumber }>
 
     getFutureVaultStakeUnits(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>
 
-    "getFutureVaultStakeUnits(address,uint256)"(
+    'getFutureVaultStakeUnits(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { stakeUnits: BigNumber }>
 
     getGeyserData(
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         [
@@ -741,81 +732,81 @@ export class Geyser extends Contract {
           string,
           string,
           [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
           },
           BigNumber,
           BigNumber,
           BigNumber,
           BigNumber,
           ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[]
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[],
         ] & {
-          stakingToken: string;
-          rewardToken: string;
-          rewardPool: string;
+          stakingToken: string
+          rewardToken: string
+          rewardPool: string
           rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
-          };
-          rewardSharesOutstanding: BigNumber;
-          totalStake: BigNumber;
-          totalStakeUnits: BigNumber;
-          lastUpdate: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
+          }
+          rewardSharesOutstanding: BigNumber
+          totalStake: BigNumber
+          totalStakeUnits: BigNumber
+          lastUpdate: BigNumber
           rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[];
-        }
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[]
+        },
       ] & {
         geyser: [
           string,
           string,
           string,
           [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
           },
           BigNumber,
           BigNumber,
           BigNumber,
           BigNumber,
           ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[]
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[],
         ] & {
-          stakingToken: string;
-          rewardToken: string;
-          rewardPool: string;
+          stakingToken: string
+          rewardToken: string
+          rewardPool: string
           rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
-          };
-          rewardSharesOutstanding: BigNumber;
-          totalStake: BigNumber;
-          totalStakeUnits: BigNumber;
-          lastUpdate: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
+          }
+          rewardSharesOutstanding: BigNumber
+          totalStake: BigNumber
+          totalStakeUnits: BigNumber
+          lastUpdate: BigNumber
           rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[];
-        };
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[]
+        }
       }
-    >;
+    >
 
-    "getGeyserData()"(
-      overrides?: CallOverrides
+    'getGeyserData()'(
+      overrides?: CallOverrides,
     ): Promise<
       [
         [
@@ -823,182 +814,182 @@ export class Geyser extends Contract {
           string,
           string,
           [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
           },
           BigNumber,
           BigNumber,
           BigNumber,
           BigNumber,
           ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[]
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[],
         ] & {
-          stakingToken: string;
-          rewardToken: string;
-          rewardPool: string;
+          stakingToken: string
+          rewardToken: string
+          rewardPool: string
           rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
-          };
-          rewardSharesOutstanding: BigNumber;
-          totalStake: BigNumber;
-          totalStakeUnits: BigNumber;
-          lastUpdate: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
+          }
+          rewardSharesOutstanding: BigNumber
+          totalStake: BigNumber
+          totalStakeUnits: BigNumber
+          lastUpdate: BigNumber
           rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[];
-        }
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[]
+        },
       ] & {
         geyser: [
           string,
           string,
           string,
           [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
           },
           BigNumber,
           BigNumber,
           BigNumber,
           BigNumber,
           ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[]
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[],
         ] & {
-          stakingToken: string;
-          rewardToken: string;
-          rewardPool: string;
+          stakingToken: string
+          rewardToken: string
+          rewardPool: string
           rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-            floor: BigNumber;
-            ceiling: BigNumber;
-            time: BigNumber;
-          };
-          rewardSharesOutstanding: BigNumber;
-          totalStake: BigNumber;
-          totalStakeUnits: BigNumber;
-          lastUpdate: BigNumber;
+            floor: BigNumber
+            ceiling: BigNumber
+            time: BigNumber
+          }
+          rewardSharesOutstanding: BigNumber
+          totalStake: BigNumber
+          totalStakeUnits: BigNumber
+          lastUpdate: BigNumber
           rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-            duration: BigNumber;
-            start: BigNumber;
-            shares: BigNumber;
-          })[];
-        };
+            duration: BigNumber
+            start: BigNumber
+            shares: BigNumber
+          })[]
+        }
       }
-    >;
+    >
 
     getPowerController(
-      overrides?: CallOverrides
-    ): Promise<[string] & { controller: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { controller: string }>
 
-    "getPowerController()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { controller: string }>;
+    'getPowerController()'(
+      overrides?: CallOverrides,
+    ): Promise<[string] & { controller: string }>
 
     getPowerSwitch(
-      overrides?: CallOverrides
-    ): Promise<[string] & { powerSwitch: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { powerSwitch: string }>
 
-    "getPowerSwitch()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { powerSwitch: string }>;
+    'getPowerSwitch()'(
+      overrides?: CallOverrides,
+    ): Promise<[string] & { powerSwitch: string }>
 
     getVaultData(
       vault: string,
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         [
           BigNumber,
           ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[]
+            amount: BigNumber
+            timestamp: BigNumber
+          })[],
         ] & {
-          totalStake: BigNumber;
+          totalStake: BigNumber
           stakes: ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[];
-        }
+            amount: BigNumber
+            timestamp: BigNumber
+          })[]
+        },
       ] & {
         vaultData: [
           BigNumber,
           ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[]
+            amount: BigNumber
+            timestamp: BigNumber
+          })[],
         ] & {
-          totalStake: BigNumber;
+          totalStake: BigNumber
           stakes: ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[];
-        };
+            amount: BigNumber
+            timestamp: BigNumber
+          })[]
+        }
       }
-    >;
+    >
 
-    "getVaultData(address)"(
+    'getVaultData(address)'(
       vault: string,
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         [
           BigNumber,
           ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[]
+            amount: BigNumber
+            timestamp: BigNumber
+          })[],
         ] & {
-          totalStake: BigNumber;
+          totalStake: BigNumber
           stakes: ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[];
-        }
+            amount: BigNumber
+            timestamp: BigNumber
+          })[]
+        },
       ] & {
         vaultData: [
           BigNumber,
           ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[]
+            amount: BigNumber
+            timestamp: BigNumber
+          })[],
         ] & {
-          totalStake: BigNumber;
+          totalStake: BigNumber
           stakes: ([BigNumber, BigNumber] & {
-            amount: BigNumber;
-            timestamp: BigNumber;
-          })[];
-        };
+            amount: BigNumber
+            timestamp: BigNumber
+          })[]
+        }
       }
-    >;
+    >
 
     getVaultFactoryAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string] & { factory: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { factory: string }>
 
-    "getVaultFactoryAtIndex(uint256)"(
+    'getVaultFactoryAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string] & { factory: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { factory: string }>
 
     getVaultFactorySetLength(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { length: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { length: BigNumber }>
 
-    "getVaultFactorySetLength()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { length: BigNumber }>;
+    'getVaultFactorySetLength()'(
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { length: BigNumber }>
 
     initialize(
       ownerAddress: string,
@@ -1007,181 +998,181 @@ export class Geyser extends Contract {
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "initialize(address,address,address,address,address,tuple)"(
+    'initialize(address,address,address,address,address,tuple)'(
       ownerAddress: string,
       rewardPoolFactory: string,
       powerSwitchFactory: string,
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    initializeLock(overrides?: Overrides): Promise<ContractTransaction>;
+    initializeLock(overrides?: Overrides): Promise<ContractTransaction>
 
-    "initializeLock()"(overrides?: Overrides): Promise<ContractTransaction>;
+    'initializeLock()'(overrides?: Overrides): Promise<ContractTransaction>
 
     isOffline(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
-    "isOffline()"(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+    'isOffline()'(
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
     isOnline(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
-    "isOnline()"(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+    'isOnline()'(
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
     isShutdown(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
-    "isShutdown()"(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+    'isShutdown()'(
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
     isValidAddress(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { validity: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { validity: boolean }>
 
-    "isValidAddress(address)"(
+    'isValidAddress(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { validity: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { validity: boolean }>
 
     isValidVault(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { validity: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { validity: boolean }>
 
-    "isValidVault(address)"(
+    'isValidVault(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { validity: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { validity: boolean }>
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
+    owner(overrides?: CallOverrides): Promise<[string]>
 
-    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+    'owner()'(overrides?: CallOverrides): Promise<[string]>
 
-    rageQuit(overrides?: Overrides): Promise<ContractTransaction>;
+    rageQuit(overrides?: Overrides): Promise<ContractTransaction>
 
-    "rageQuit()"(overrides?: Overrides): Promise<ContractTransaction>;
+    'rageQuit()'(overrides?: Overrides): Promise<ContractTransaction>
 
     registerBonusToken(
       bonusToken: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "registerBonusToken(address)"(
+    'registerBonusToken(address)'(
       bonusToken: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     registerVaultFactory(
       factory: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "registerVaultFactory(address)"(
+    'registerVaultFactory(address)'(
       factory: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     removeVaultFactory(
       factory: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "removeVaultFactory(address)"(
+    'removeVaultFactory(address)'(
       factory: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
+    renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>
 
-    "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+    'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>
 
     rescueTokensFromRewardPool(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "rescueTokensFromRewardPool(address,address,uint256)"(
+    'rescueTokensFromRewardPool(address,address,uint256)'(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     stake(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "stake(address,uint256,bytes)"(
+    'stake(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     unstakeAndClaim(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "unstakeAndClaim(address,uint256,bytes)"(
+    'unstakeAndClaim(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-  };
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
+  }
 
-  BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<BigNumber>;
+  BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<BigNumber>
 
-  "BASE_SHARES_PER_WEI()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'BASE_SHARES_PER_WEI()'(overrides?: CallOverrides): Promise<BigNumber>
 
-  MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
+  MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<BigNumber>
 
-  "MAX_REWARD_TOKENS()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'MAX_REWARD_TOKENS()'(overrides?: CallOverrides): Promise<BigNumber>
 
-  MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<BigNumber>;
+  MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<BigNumber>
 
-  "MAX_STAKES_PER_VAULT()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'MAX_STAKES_PER_VAULT()'(overrides?: CallOverrides): Promise<BigNumber>
 
   calculateReward(
     unlockedRewards: BigNumberish,
@@ -1189,25 +1180,25 @@ export class Geyser extends Contract {
     stakeDuration: BigNumberish,
     totalStakeUnits: BigNumberish,
     rewardScaling: {
-      floor: BigNumberish;
-      ceiling: BigNumberish;
-      time: BigNumberish;
+      floor: BigNumberish
+      ceiling: BigNumberish
+      time: BigNumberish
     },
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "calculateReward(uint256,uint256,uint256,uint256,tuple)"(
+  'calculateReward(uint256,uint256,uint256,uint256,tuple)'(
     unlockedRewards: BigNumberish,
     stakeAmount: BigNumberish,
     stakeDuration: BigNumberish,
     totalStakeUnits: BigNumberish,
     rewardScaling: {
-      floor: BigNumberish;
-      ceiling: BigNumberish;
-      time: BigNumberish;
+      floor: BigNumberish
+      ceiling: BigNumberish
+      time: BigNumberish
     },
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   calculateRewardFromStakes(
     stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
@@ -1216,352 +1207,352 @@ export class Geyser extends Contract {
     totalStakeUnits: BigNumberish,
     timestamp: BigNumberish,
     rewardScaling: {
-      floor: BigNumberish;
-      ceiling: BigNumberish;
-      time: BigNumberish;
+      floor: BigNumberish
+      ceiling: BigNumberish
+      time: BigNumberish
     },
-    overrides?: CallOverrides
+    overrides?: CallOverrides,
   ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      lastStakeAmount: BigNumber;
-      newStakesCount: BigNumber;
-      reward: BigNumber;
-      newTotalStakeUnits: BigNumber;
+      lastStakeAmount: BigNumber
+      newStakesCount: BigNumber
+      reward: BigNumber
+      newTotalStakeUnits: BigNumber
     }
-  >;
+  >
 
-  "calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)"(
+  'calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)'(
     stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
     unstakeAmount: BigNumberish,
     unlockedRewards: BigNumberish,
     totalStakeUnits: BigNumberish,
     timestamp: BigNumberish,
     rewardScaling: {
-      floor: BigNumberish;
-      ceiling: BigNumberish;
-      time: BigNumberish;
+      floor: BigNumberish
+      ceiling: BigNumberish
+      time: BigNumberish
     },
-    overrides?: CallOverrides
+    overrides?: CallOverrides,
   ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      lastStakeAmount: BigNumber;
-      newStakesCount: BigNumber;
-      reward: BigNumber;
-      newTotalStakeUnits: BigNumber;
+      lastStakeAmount: BigNumber
+      newStakesCount: BigNumber
+      reward: BigNumber
+      newTotalStakeUnits: BigNumber
     }
-  >;
+  >
 
   calculateStakeUnits(
     amount: BigNumberish,
     start: BigNumberish,
     end: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "calculateStakeUnits(uint256,uint256,uint256)"(
+  'calculateStakeUnits(uint256,uint256,uint256)'(
     amount: BigNumberish,
     start: BigNumberish,
     end: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   calculateTotalStakeUnits(
     stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "calculateTotalStakeUnits(tuple[],uint256)"(
+  'calculateTotalStakeUnits(tuple[],uint256)'(
     stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   calculateUnlockedRewards(
     rewardSchedules: {
-      duration: BigNumberish;
-      start: BigNumberish;
-      shares: BigNumberish;
+      duration: BigNumberish
+      start: BigNumberish
+      shares: BigNumberish
     }[],
     rewardBalance: BigNumberish,
     sharesOutstanding: BigNumberish,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "calculateUnlockedRewards(tuple[],uint256,uint256,uint256)"(
+  'calculateUnlockedRewards(tuple[],uint256,uint256,uint256)'(
     rewardSchedules: {
-      duration: BigNumberish;
-      start: BigNumberish;
-      shares: BigNumberish;
+      duration: BigNumberish
+      start: BigNumberish
+      shares: BigNumberish
     }[],
     rewardBalance: BigNumberish,
     sharesOutstanding: BigNumberish,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   fundGeyser(
     amount: BigNumberish,
     duration: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "fundGeyser(uint256,uint256)"(
+  'fundGeyser(uint256,uint256)'(
     amount: BigNumberish,
     duration: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   getBonusTokenAtIndex(
     index: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: CallOverrides,
+  ): Promise<string>
 
-  "getBonusTokenAtIndex(uint256)"(
+  'getBonusTokenAtIndex(uint256)'(
     index: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: CallOverrides,
+  ): Promise<string>
 
-  getBonusTokenSetLength(overrides?: CallOverrides): Promise<BigNumber>;
+  getBonusTokenSetLength(overrides?: CallOverrides): Promise<BigNumber>
 
-  "getBonusTokenSetLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'getBonusTokenSetLength()'(overrides?: CallOverrides): Promise<BigNumber>
 
   getCurrentStakeReward(
     vault: string,
     stakeAmount: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getCurrentStakeReward(address,uint256)"(
+  'getCurrentStakeReward(address,uint256)'(
     vault: string,
     stakeAmount: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  getCurrentTotalStakeUnits(overrides?: CallOverrides): Promise<BigNumber>;
+  getCurrentTotalStakeUnits(overrides?: CallOverrides): Promise<BigNumber>
 
-  "getCurrentTotalStakeUnits()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'getCurrentTotalStakeUnits()'(overrides?: CallOverrides): Promise<BigNumber>
 
-  getCurrentUnlockedRewards(overrides?: CallOverrides): Promise<BigNumber>;
+  getCurrentUnlockedRewards(overrides?: CallOverrides): Promise<BigNumber>
 
-  "getCurrentUnlockedRewards()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'getCurrentUnlockedRewards()'(overrides?: CallOverrides): Promise<BigNumber>
 
   getCurrentVaultReward(
     vault: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getCurrentVaultReward(address)"(
+  'getCurrentVaultReward(address)'(
     vault: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   getCurrentVaultStakeUnits(
     vault: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getCurrentVaultStakeUnits(address)"(
+  'getCurrentVaultStakeUnits(address)'(
     vault: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   getFutureStakeReward(
     vault: string,
     stakeAmount: BigNumberish,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getFutureStakeReward(address,uint256,uint256)"(
+  'getFutureStakeReward(address,uint256,uint256)'(
     vault: string,
     stakeAmount: BigNumberish,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   getFutureTotalStakeUnits(
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getFutureTotalStakeUnits(uint256)"(
+  'getFutureTotalStakeUnits(uint256)'(
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   getFutureUnlockedRewards(
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getFutureUnlockedRewards(uint256)"(
+  'getFutureUnlockedRewards(uint256)'(
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   getFutureVaultReward(
     vault: string,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getFutureVaultReward(address,uint256)"(
+  'getFutureVaultReward(address,uint256)'(
     vault: string,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   getFutureVaultStakeUnits(
     vault: string,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
-  "getFutureVaultStakeUnits(address,uint256)"(
+  'getFutureVaultStakeUnits(address,uint256)'(
     vault: string,
     timestamp: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+    overrides?: CallOverrides,
+  ): Promise<BigNumber>
 
   getGeyserData(
-    overrides?: CallOverrides
+    overrides?: CallOverrides,
   ): Promise<
     [
       string,
       string,
       string,
       [BigNumber, BigNumber, BigNumber] & {
-        floor: BigNumber;
-        ceiling: BigNumber;
-        time: BigNumber;
+        floor: BigNumber
+        ceiling: BigNumber
+        time: BigNumber
       },
       BigNumber,
       BigNumber,
       BigNumber,
       BigNumber,
       ([BigNumber, BigNumber, BigNumber] & {
-        duration: BigNumber;
-        start: BigNumber;
-        shares: BigNumber;
-      })[]
+        duration: BigNumber
+        start: BigNumber
+        shares: BigNumber
+      })[],
     ] & {
-      stakingToken: string;
-      rewardToken: string;
-      rewardPool: string;
+      stakingToken: string
+      rewardToken: string
+      rewardPool: string
       rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-        floor: BigNumber;
-        ceiling: BigNumber;
-        time: BigNumber;
-      };
-      rewardSharesOutstanding: BigNumber;
-      totalStake: BigNumber;
-      totalStakeUnits: BigNumber;
-      lastUpdate: BigNumber;
+        floor: BigNumber
+        ceiling: BigNumber
+        time: BigNumber
+      }
+      rewardSharesOutstanding: BigNumber
+      totalStake: BigNumber
+      totalStakeUnits: BigNumber
+      lastUpdate: BigNumber
       rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-        duration: BigNumber;
-        start: BigNumber;
-        shares: BigNumber;
-      })[];
+        duration: BigNumber
+        start: BigNumber
+        shares: BigNumber
+      })[]
     }
-  >;
+  >
 
-  "getGeyserData()"(
-    overrides?: CallOverrides
+  'getGeyserData()'(
+    overrides?: CallOverrides,
   ): Promise<
     [
       string,
       string,
       string,
       [BigNumber, BigNumber, BigNumber] & {
-        floor: BigNumber;
-        ceiling: BigNumber;
-        time: BigNumber;
+        floor: BigNumber
+        ceiling: BigNumber
+        time: BigNumber
       },
       BigNumber,
       BigNumber,
       BigNumber,
       BigNumber,
       ([BigNumber, BigNumber, BigNumber] & {
-        duration: BigNumber;
-        start: BigNumber;
-        shares: BigNumber;
-      })[]
+        duration: BigNumber
+        start: BigNumber
+        shares: BigNumber
+      })[],
     ] & {
-      stakingToken: string;
-      rewardToken: string;
-      rewardPool: string;
+      stakingToken: string
+      rewardToken: string
+      rewardPool: string
       rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-        floor: BigNumber;
-        ceiling: BigNumber;
-        time: BigNumber;
-      };
-      rewardSharesOutstanding: BigNumber;
-      totalStake: BigNumber;
-      totalStakeUnits: BigNumber;
-      lastUpdate: BigNumber;
+        floor: BigNumber
+        ceiling: BigNumber
+        time: BigNumber
+      }
+      rewardSharesOutstanding: BigNumber
+      totalStake: BigNumber
+      totalStakeUnits: BigNumber
+      lastUpdate: BigNumber
       rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-        duration: BigNumber;
-        start: BigNumber;
-        shares: BigNumber;
-      })[];
+        duration: BigNumber
+        start: BigNumber
+        shares: BigNumber
+      })[]
     }
-  >;
+  >
 
-  getPowerController(overrides?: CallOverrides): Promise<string>;
+  getPowerController(overrides?: CallOverrides): Promise<string>
 
-  "getPowerController()"(overrides?: CallOverrides): Promise<string>;
+  'getPowerController()'(overrides?: CallOverrides): Promise<string>
 
-  getPowerSwitch(overrides?: CallOverrides): Promise<string>;
+  getPowerSwitch(overrides?: CallOverrides): Promise<string>
 
-  "getPowerSwitch()"(overrides?: CallOverrides): Promise<string>;
+  'getPowerSwitch()'(overrides?: CallOverrides): Promise<string>
 
   getVaultData(
     vault: string,
-    overrides?: CallOverrides
+    overrides?: CallOverrides,
   ): Promise<
     [
       BigNumber,
-      ([BigNumber, BigNumber] & { amount: BigNumber; timestamp: BigNumber })[]
+      ([BigNumber, BigNumber] & { amount: BigNumber; timestamp: BigNumber })[],
     ] & {
-      totalStake: BigNumber;
+      totalStake: BigNumber
       stakes: ([BigNumber, BigNumber] & {
-        amount: BigNumber;
-        timestamp: BigNumber;
-      })[];
+        amount: BigNumber
+        timestamp: BigNumber
+      })[]
     }
-  >;
+  >
 
-  "getVaultData(address)"(
+  'getVaultData(address)'(
     vault: string,
-    overrides?: CallOverrides
+    overrides?: CallOverrides,
   ): Promise<
     [
       BigNumber,
-      ([BigNumber, BigNumber] & { amount: BigNumber; timestamp: BigNumber })[]
+      ([BigNumber, BigNumber] & { amount: BigNumber; timestamp: BigNumber })[],
     ] & {
-      totalStake: BigNumber;
+      totalStake: BigNumber
       stakes: ([BigNumber, BigNumber] & {
-        amount: BigNumber;
-        timestamp: BigNumber;
-      })[];
+        amount: BigNumber
+        timestamp: BigNumber
+      })[]
     }
-  >;
+  >
 
   getVaultFactoryAtIndex(
     index: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: CallOverrides,
+  ): Promise<string>
 
-  "getVaultFactoryAtIndex(uint256)"(
+  'getVaultFactoryAtIndex(uint256)'(
     index: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: CallOverrides,
+  ): Promise<string>
 
-  getVaultFactorySetLength(overrides?: CallOverrides): Promise<BigNumber>;
+  getVaultFactorySetLength(overrides?: CallOverrides): Promise<BigNumber>
 
-  "getVaultFactorySetLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'getVaultFactorySetLength()'(overrides?: CallOverrides): Promise<BigNumber>
 
   initialize(
     ownerAddress: string,
@@ -1570,163 +1561,163 @@ export class Geyser extends Contract {
     stakingToken: string,
     rewardToken: string,
     rewardScaling: {
-      floor: BigNumberish;
-      ceiling: BigNumberish;
-      time: BigNumberish;
+      floor: BigNumberish
+      ceiling: BigNumberish
+      time: BigNumberish
     },
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "initialize(address,address,address,address,address,tuple)"(
+  'initialize(address,address,address,address,address,tuple)'(
     ownerAddress: string,
     rewardPoolFactory: string,
     powerSwitchFactory: string,
     stakingToken: string,
     rewardToken: string,
     rewardScaling: {
-      floor: BigNumberish;
-      ceiling: BigNumberish;
-      time: BigNumberish;
+      floor: BigNumberish
+      ceiling: BigNumberish
+      time: BigNumberish
     },
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  initializeLock(overrides?: Overrides): Promise<ContractTransaction>;
+  initializeLock(overrides?: Overrides): Promise<ContractTransaction>
 
-  "initializeLock()"(overrides?: Overrides): Promise<ContractTransaction>;
+  'initializeLock()'(overrides?: Overrides): Promise<ContractTransaction>
 
-  isOffline(overrides?: CallOverrides): Promise<boolean>;
+  isOffline(overrides?: CallOverrides): Promise<boolean>
 
-  "isOffline()"(overrides?: CallOverrides): Promise<boolean>;
+  'isOffline()'(overrides?: CallOverrides): Promise<boolean>
 
-  isOnline(overrides?: CallOverrides): Promise<boolean>;
+  isOnline(overrides?: CallOverrides): Promise<boolean>
 
-  "isOnline()"(overrides?: CallOverrides): Promise<boolean>;
+  'isOnline()'(overrides?: CallOverrides): Promise<boolean>
 
-  isShutdown(overrides?: CallOverrides): Promise<boolean>;
+  isShutdown(overrides?: CallOverrides): Promise<boolean>
 
-  "isShutdown()"(overrides?: CallOverrides): Promise<boolean>;
+  'isShutdown()'(overrides?: CallOverrides): Promise<boolean>
 
-  isValidAddress(target: string, overrides?: CallOverrides): Promise<boolean>;
+  isValidAddress(target: string, overrides?: CallOverrides): Promise<boolean>
 
-  "isValidAddress(address)"(
+  'isValidAddress(address)'(
     target: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+    overrides?: CallOverrides,
+  ): Promise<boolean>
 
-  isValidVault(target: string, overrides?: CallOverrides): Promise<boolean>;
+  isValidVault(target: string, overrides?: CallOverrides): Promise<boolean>
 
-  "isValidVault(address)"(
+  'isValidVault(address)'(
     target: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+    overrides?: CallOverrides,
+  ): Promise<boolean>
 
-  owner(overrides?: CallOverrides): Promise<string>;
+  owner(overrides?: CallOverrides): Promise<string>
 
-  "owner()"(overrides?: CallOverrides): Promise<string>;
+  'owner()'(overrides?: CallOverrides): Promise<string>
 
-  rageQuit(overrides?: Overrides): Promise<ContractTransaction>;
+  rageQuit(overrides?: Overrides): Promise<ContractTransaction>
 
-  "rageQuit()"(overrides?: Overrides): Promise<ContractTransaction>;
+  'rageQuit()'(overrides?: Overrides): Promise<ContractTransaction>
 
   registerBonusToken(
     bonusToken: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "registerBonusToken(address)"(
+  'registerBonusToken(address)'(
     bonusToken: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   registerVaultFactory(
     factory: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "registerVaultFactory(address)"(
+  'registerVaultFactory(address)'(
     factory: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   removeVaultFactory(
     factory: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "removeVaultFactory(address)"(
+  'removeVaultFactory(address)'(
     factory: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
+  renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>
 
-  "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+  'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>
 
   rescueTokensFromRewardPool(
     token: string,
     recipient: string,
     amount: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "rescueTokensFromRewardPool(address,address,uint256)"(
+  'rescueTokensFromRewardPool(address,address,uint256)'(
     token: string,
     recipient: string,
     amount: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   stake(
     vault: string,
     amount: BigNumberish,
     permission: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "stake(address,uint256,bytes)"(
+  'stake(address,uint256,bytes)'(
     vault: string,
     amount: BigNumberish,
     permission: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   transferOwnership(
     newOwner: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "transferOwnership(address)"(
+  'transferOwnership(address)'(
     newOwner: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   unstakeAndClaim(
     vault: string,
     amount: BigNumberish,
     permission: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "unstakeAndClaim(address,uint256,bytes)"(
+  'unstakeAndClaim(address,uint256,bytes)'(
     vault: string,
     amount: BigNumberish,
     permission: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   callStatic: {
-    BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<BigNumber>;
+    BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<BigNumber>
 
-    "BASE_SHARES_PER_WEI()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'BASE_SHARES_PER_WEI()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
+    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<BigNumber>
 
-    "MAX_REWARD_TOKENS()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'MAX_REWARD_TOKENS()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<BigNumber>;
+    MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<BigNumber>
 
-    "MAX_STAKES_PER_VAULT()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'MAX_STAKES_PER_VAULT()'(overrides?: CallOverrides): Promise<BigNumber>
 
     calculateReward(
       unlockedRewards: BigNumberish,
@@ -1734,25 +1725,25 @@ export class Geyser extends Contract {
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateReward(uint256,uint256,uint256,uint256,tuple)"(
+    'calculateReward(uint256,uint256,uint256,uint256,tuple)'(
       unlockedRewards: BigNumberish,
       stakeAmount: BigNumberish,
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     calculateRewardFromStakes(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
@@ -1761,356 +1752,358 @@ export class Geyser extends Contract {
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        lastStakeAmount: BigNumber;
-        newStakesCount: BigNumber;
-        reward: BigNumber;
-        newTotalStakeUnits: BigNumber;
+        lastStakeAmount: BigNumber
+        newStakesCount: BigNumber
+        reward: BigNumber
+        newTotalStakeUnits: BigNumber
       }
-    >;
+    >
 
-    "calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)"(
+    'calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       unstakeAmount: BigNumberish,
       unlockedRewards: BigNumberish,
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        lastStakeAmount: BigNumber;
-        newStakesCount: BigNumber;
-        reward: BigNumber;
-        newTotalStakeUnits: BigNumber;
+        lastStakeAmount: BigNumber
+        newStakesCount: BigNumber
+        reward: BigNumber
+        newTotalStakeUnits: BigNumber
       }
-    >;
+    >
 
     calculateStakeUnits(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateStakeUnits(uint256,uint256,uint256)"(
+    'calculateStakeUnits(uint256,uint256,uint256)'(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     calculateTotalStakeUnits(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateTotalStakeUnits(tuple[],uint256)"(
+    'calculateTotalStakeUnits(tuple[],uint256)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     calculateUnlockedRewards(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateUnlockedRewards(tuple[],uint256,uint256,uint256)"(
+    'calculateUnlockedRewards(tuple[],uint256,uint256,uint256)'(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     fundGeyser(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "fundGeyser(uint256,uint256)"(
+    'fundGeyser(uint256,uint256)'(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     getBonusTokenAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
+      overrides?: CallOverrides,
+    ): Promise<string>
 
-    "getBonusTokenAtIndex(uint256)"(
+    'getBonusTokenAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
+      overrides?: CallOverrides,
+    ): Promise<string>
 
-    getBonusTokenSetLength(overrides?: CallOverrides): Promise<BigNumber>;
+    getBonusTokenSetLength(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getBonusTokenSetLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getBonusTokenSetLength()'(overrides?: CallOverrides): Promise<BigNumber>
 
     getCurrentStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getCurrentStakeReward(address,uint256)"(
+    'getCurrentStakeReward(address,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    getCurrentTotalStakeUnits(overrides?: CallOverrides): Promise<BigNumber>;
+    getCurrentTotalStakeUnits(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getCurrentTotalStakeUnits()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'getCurrentTotalStakeUnits()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    getCurrentUnlockedRewards(overrides?: CallOverrides): Promise<BigNumber>;
+    getCurrentUnlockedRewards(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getCurrentUnlockedRewards()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'getCurrentUnlockedRewards()'(overrides?: CallOverrides): Promise<BigNumber>
 
     getCurrentVaultReward(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getCurrentVaultReward(address)"(
+    'getCurrentVaultReward(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getCurrentVaultStakeUnits(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getCurrentVaultStakeUnits(address)"(
+    'getCurrentVaultStakeUnits(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureStakeReward(address,uint256,uint256)"(
+    'getFutureStakeReward(address,uint256,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureTotalStakeUnits(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureTotalStakeUnits(uint256)"(
+    'getFutureTotalStakeUnits(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureUnlockedRewards(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureUnlockedRewards(uint256)"(
+    'getFutureUnlockedRewards(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureVaultReward(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureVaultReward(address,uint256)"(
+    'getFutureVaultReward(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureVaultStakeUnits(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureVaultStakeUnits(address,uint256)"(
+    'getFutureVaultStakeUnits(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getGeyserData(
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         string,
         string,
         string,
         [BigNumber, BigNumber, BigNumber] & {
-          floor: BigNumber;
-          ceiling: BigNumber;
-          time: BigNumber;
+          floor: BigNumber
+          ceiling: BigNumber
+          time: BigNumber
         },
         BigNumber,
         BigNumber,
         BigNumber,
         BigNumber,
         ([BigNumber, BigNumber, BigNumber] & {
-          duration: BigNumber;
-          start: BigNumber;
-          shares: BigNumber;
-        })[]
+          duration: BigNumber
+          start: BigNumber
+          shares: BigNumber
+        })[],
       ] & {
-        stakingToken: string;
-        rewardToken: string;
-        rewardPool: string;
+        stakingToken: string
+        rewardToken: string
+        rewardPool: string
         rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-          floor: BigNumber;
-          ceiling: BigNumber;
-          time: BigNumber;
-        };
-        rewardSharesOutstanding: BigNumber;
-        totalStake: BigNumber;
-        totalStakeUnits: BigNumber;
-        lastUpdate: BigNumber;
+          floor: BigNumber
+          ceiling: BigNumber
+          time: BigNumber
+        }
+        rewardSharesOutstanding: BigNumber
+        totalStake: BigNumber
+        totalStakeUnits: BigNumber
+        lastUpdate: BigNumber
         rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-          duration: BigNumber;
-          start: BigNumber;
-          shares: BigNumber;
-        })[];
+          duration: BigNumber
+          start: BigNumber
+          shares: BigNumber
+        })[]
       }
-    >;
+    >
 
-    "getGeyserData()"(
-      overrides?: CallOverrides
+    'getGeyserData()'(
+      overrides?: CallOverrides,
     ): Promise<
       [
         string,
         string,
         string,
         [BigNumber, BigNumber, BigNumber] & {
-          floor: BigNumber;
-          ceiling: BigNumber;
-          time: BigNumber;
+          floor: BigNumber
+          ceiling: BigNumber
+          time: BigNumber
         },
         BigNumber,
         BigNumber,
         BigNumber,
         BigNumber,
         ([BigNumber, BigNumber, BigNumber] & {
-          duration: BigNumber;
-          start: BigNumber;
-          shares: BigNumber;
-        })[]
+          duration: BigNumber
+          start: BigNumber
+          shares: BigNumber
+        })[],
       ] & {
-        stakingToken: string;
-        rewardToken: string;
-        rewardPool: string;
+        stakingToken: string
+        rewardToken: string
+        rewardPool: string
         rewardScaling: [BigNumber, BigNumber, BigNumber] & {
-          floor: BigNumber;
-          ceiling: BigNumber;
-          time: BigNumber;
-        };
-        rewardSharesOutstanding: BigNumber;
-        totalStake: BigNumber;
-        totalStakeUnits: BigNumber;
-        lastUpdate: BigNumber;
+          floor: BigNumber
+          ceiling: BigNumber
+          time: BigNumber
+        }
+        rewardSharesOutstanding: BigNumber
+        totalStake: BigNumber
+        totalStakeUnits: BigNumber
+        lastUpdate: BigNumber
         rewardSchedules: ([BigNumber, BigNumber, BigNumber] & {
-          duration: BigNumber;
-          start: BigNumber;
-          shares: BigNumber;
-        })[];
+          duration: BigNumber
+          start: BigNumber
+          shares: BigNumber
+        })[]
       }
-    >;
+    >
 
-    getPowerController(overrides?: CallOverrides): Promise<string>;
+    getPowerController(overrides?: CallOverrides): Promise<string>
 
-    "getPowerController()"(overrides?: CallOverrides): Promise<string>;
+    'getPowerController()'(overrides?: CallOverrides): Promise<string>
 
-    getPowerSwitch(overrides?: CallOverrides): Promise<string>;
+    getPowerSwitch(overrides?: CallOverrides): Promise<string>
 
-    "getPowerSwitch()"(overrides?: CallOverrides): Promise<string>;
+    'getPowerSwitch()'(overrides?: CallOverrides): Promise<string>
 
     getVaultData(
       vault: string,
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         BigNumber,
-        ([BigNumber, BigNumber] & { amount: BigNumber; timestamp: BigNumber })[]
+        ([BigNumber, BigNumber] & {
+          amount: BigNumber
+          timestamp: BigNumber
+        })[],
       ] & {
-        totalStake: BigNumber;
+        totalStake: BigNumber
         stakes: ([BigNumber, BigNumber] & {
-          amount: BigNumber;
-          timestamp: BigNumber;
-        })[];
+          amount: BigNumber
+          timestamp: BigNumber
+        })[]
       }
-    >;
+    >
 
-    "getVaultData(address)"(
+    'getVaultData(address)'(
       vault: string,
-      overrides?: CallOverrides
+      overrides?: CallOverrides,
     ): Promise<
       [
         BigNumber,
-        ([BigNumber, BigNumber] & { amount: BigNumber; timestamp: BigNumber })[]
+        ([BigNumber, BigNumber] & {
+          amount: BigNumber
+          timestamp: BigNumber
+        })[],
       ] & {
-        totalStake: BigNumber;
+        totalStake: BigNumber
         stakes: ([BigNumber, BigNumber] & {
-          amount: BigNumber;
-          timestamp: BigNumber;
-        })[];
+          amount: BigNumber
+          timestamp: BigNumber
+        })[]
       }
-    >;
+    >
 
     getVaultFactoryAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
+      overrides?: CallOverrides,
+    ): Promise<string>
 
-    "getVaultFactoryAtIndex(uint256)"(
+    'getVaultFactoryAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
+      overrides?: CallOverrides,
+    ): Promise<string>
 
-    getVaultFactorySetLength(overrides?: CallOverrides): Promise<BigNumber>;
+    getVaultFactorySetLength(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getVaultFactorySetLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getVaultFactorySetLength()'(overrides?: CallOverrides): Promise<BigNumber>
 
     initialize(
       ownerAddress: string,
@@ -2119,187 +2112,187 @@ export class Geyser extends Contract {
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "initialize(address,address,address,address,address,tuple)"(
+    'initialize(address,address,address,address,address,tuple)'(
       ownerAddress: string,
       rewardPoolFactory: string,
       powerSwitchFactory: string,
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    initializeLock(overrides?: CallOverrides): Promise<void>;
+    initializeLock(overrides?: CallOverrides): Promise<void>
 
-    "initializeLock()"(overrides?: CallOverrides): Promise<void>;
+    'initializeLock()'(overrides?: CallOverrides): Promise<void>
 
-    isOffline(overrides?: CallOverrides): Promise<boolean>;
+    isOffline(overrides?: CallOverrides): Promise<boolean>
 
-    "isOffline()"(overrides?: CallOverrides): Promise<boolean>;
+    'isOffline()'(overrides?: CallOverrides): Promise<boolean>
 
-    isOnline(overrides?: CallOverrides): Promise<boolean>;
+    isOnline(overrides?: CallOverrides): Promise<boolean>
 
-    "isOnline()"(overrides?: CallOverrides): Promise<boolean>;
+    'isOnline()'(overrides?: CallOverrides): Promise<boolean>
 
-    isShutdown(overrides?: CallOverrides): Promise<boolean>;
+    isShutdown(overrides?: CallOverrides): Promise<boolean>
 
-    "isShutdown()"(overrides?: CallOverrides): Promise<boolean>;
+    'isShutdown()'(overrides?: CallOverrides): Promise<boolean>
 
-    isValidAddress(target: string, overrides?: CallOverrides): Promise<boolean>;
+    isValidAddress(target: string, overrides?: CallOverrides): Promise<boolean>
 
-    "isValidAddress(address)"(
+    'isValidAddress(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+      overrides?: CallOverrides,
+    ): Promise<boolean>
 
-    isValidVault(target: string, overrides?: CallOverrides): Promise<boolean>;
+    isValidVault(target: string, overrides?: CallOverrides): Promise<boolean>
 
-    "isValidVault(address)"(
+    'isValidVault(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+      overrides?: CallOverrides,
+    ): Promise<boolean>
 
-    owner(overrides?: CallOverrides): Promise<string>;
+    owner(overrides?: CallOverrides): Promise<string>
 
-    "owner()"(overrides?: CallOverrides): Promise<string>;
+    'owner()'(overrides?: CallOverrides): Promise<string>
 
-    rageQuit(overrides?: CallOverrides): Promise<void>;
+    rageQuit(overrides?: CallOverrides): Promise<void>
 
-    "rageQuit()"(overrides?: CallOverrides): Promise<void>;
+    'rageQuit()'(overrides?: CallOverrides): Promise<void>
 
     registerBonusToken(
       bonusToken: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "registerBonusToken(address)"(
+    'registerBonusToken(address)'(
       bonusToken: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     registerVaultFactory(
       factory: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "registerVaultFactory(address)"(
+    'registerVaultFactory(address)'(
       factory: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     removeVaultFactory(
       factory: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "removeVaultFactory(address)"(
+    'removeVaultFactory(address)'(
       factory: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    renounceOwnership(overrides?: CallOverrides): Promise<void>
 
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>
 
     rescueTokensFromRewardPool(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "rescueTokensFromRewardPool(address,address,uint256)"(
+    'rescueTokensFromRewardPool(address,address,uint256)'(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     stake(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "stake(address,uint256,bytes)"(
+    'stake(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     transferOwnership(
       newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     unstakeAndClaim(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "unstakeAndClaim(address,uint256,bytes)"(
+    'unstakeAndClaim(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<void>
+  }
 
   filters: {
-    BonusTokenRegistered(token: null): EventFilter;
+    BonusTokenRegistered(token: null): EventFilter
 
-    GeyserCreated(rewardPool: null, powerSwitch: null): EventFilter;
+    GeyserCreated(rewardPool: null, powerSwitch: null): EventFilter
 
-    GeyserFunded(amount: null, duration: null): EventFilter;
+    GeyserFunded(amount: null, duration: null): EventFilter
 
     OwnershipTransferred(
       previousOwner: string | null,
-      newOwner: string | null
-    ): EventFilter;
+      newOwner: string | null,
+    ): EventFilter
 
-    RewardClaimed(vault: null, token: null, amount: null): EventFilter;
+    RewardClaimed(vault: null, token: null, amount: null): EventFilter
 
-    Staked(vault: null, amount: null): EventFilter;
+    Staked(vault: null, amount: null): EventFilter
 
-    Unstaked(vault: null, amount: null): EventFilter;
+    Unstaked(vault: null, amount: null): EventFilter
 
-    VaultFactoryRegistered(factory: null): EventFilter;
+    VaultFactoryRegistered(factory: null): EventFilter
 
-    VaultFactoryRemoved(factory: null): EventFilter;
-  };
+    VaultFactoryRemoved(factory: null): EventFilter
+  }
 
   estimateGas: {
-    BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<BigNumber>;
+    BASE_SHARES_PER_WEI(overrides?: CallOverrides): Promise<BigNumber>
 
-    "BASE_SHARES_PER_WEI()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'BASE_SHARES_PER_WEI()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
+    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<BigNumber>
 
-    "MAX_REWARD_TOKENS()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'MAX_REWARD_TOKENS()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<BigNumber>;
+    MAX_STAKES_PER_VAULT(overrides?: CallOverrides): Promise<BigNumber>
 
-    "MAX_STAKES_PER_VAULT()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'MAX_STAKES_PER_VAULT()'(overrides?: CallOverrides): Promise<BigNumber>
 
     calculateReward(
       unlockedRewards: BigNumberish,
@@ -2307,25 +2300,25 @@ export class Geyser extends Contract {
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateReward(uint256,uint256,uint256,uint256,tuple)"(
+    'calculateReward(uint256,uint256,uint256,uint256,tuple)'(
       unlockedRewards: BigNumberish,
       stakeAmount: BigNumberish,
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     calculateRewardFromStakes(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
@@ -2334,237 +2327,233 @@ export class Geyser extends Contract {
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)"(
+    'calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       unstakeAmount: BigNumberish,
       unlockedRewards: BigNumberish,
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     calculateStakeUnits(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateStakeUnits(uint256,uint256,uint256)"(
+    'calculateStakeUnits(uint256,uint256,uint256)'(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     calculateTotalStakeUnits(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateTotalStakeUnits(tuple[],uint256)"(
+    'calculateTotalStakeUnits(tuple[],uint256)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     calculateUnlockedRewards(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "calculateUnlockedRewards(tuple[],uint256,uint256,uint256)"(
+    'calculateUnlockedRewards(tuple[],uint256,uint256,uint256)'(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     fundGeyser(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "fundGeyser(uint256,uint256)"(
+    'fundGeyser(uint256,uint256)'(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     getBonusTokenAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getBonusTokenAtIndex(uint256)"(
+    'getBonusTokenAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    getBonusTokenSetLength(overrides?: CallOverrides): Promise<BigNumber>;
+    getBonusTokenSetLength(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getBonusTokenSetLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getBonusTokenSetLength()'(overrides?: CallOverrides): Promise<BigNumber>
 
     getCurrentStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getCurrentStakeReward(address,uint256)"(
+    'getCurrentStakeReward(address,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    getCurrentTotalStakeUnits(overrides?: CallOverrides): Promise<BigNumber>;
+    getCurrentTotalStakeUnits(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getCurrentTotalStakeUnits()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'getCurrentTotalStakeUnits()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    getCurrentUnlockedRewards(overrides?: CallOverrides): Promise<BigNumber>;
+    getCurrentUnlockedRewards(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getCurrentUnlockedRewards()"(
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'getCurrentUnlockedRewards()'(overrides?: CallOverrides): Promise<BigNumber>
 
     getCurrentVaultReward(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getCurrentVaultReward(address)"(
+    'getCurrentVaultReward(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getCurrentVaultStakeUnits(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getCurrentVaultStakeUnits(address)"(
+    'getCurrentVaultStakeUnits(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureStakeReward(address,uint256,uint256)"(
+    'getFutureStakeReward(address,uint256,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureTotalStakeUnits(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureTotalStakeUnits(uint256)"(
+    'getFutureTotalStakeUnits(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureUnlockedRewards(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureUnlockedRewards(uint256)"(
+    'getFutureUnlockedRewards(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureVaultReward(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureVaultReward(address,uint256)"(
+    'getFutureVaultReward(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getFutureVaultStakeUnits(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getFutureVaultStakeUnits(address,uint256)"(
+    'getFutureVaultStakeUnits(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    getGeyserData(overrides?: CallOverrides): Promise<BigNumber>;
+    getGeyserData(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getGeyserData()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getGeyserData()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    getPowerController(overrides?: CallOverrides): Promise<BigNumber>;
+    getPowerController(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getPowerController()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getPowerController()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    getPowerSwitch(overrides?: CallOverrides): Promise<BigNumber>;
+    getPowerSwitch(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getPowerSwitch()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getPowerSwitch()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    getVaultData(vault: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getVaultData(vault: string, overrides?: CallOverrides): Promise<BigNumber>
 
-    "getVaultData(address)"(
+    'getVaultData(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
     getVaultFactoryAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "getVaultFactoryAtIndex(uint256)"(
+    'getVaultFactoryAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    getVaultFactorySetLength(overrides?: CallOverrides): Promise<BigNumber>;
+    getVaultFactorySetLength(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getVaultFactorySetLength()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getVaultFactorySetLength()'(overrides?: CallOverrides): Promise<BigNumber>
 
     initialize(
       ownerAddress: string,
@@ -2573,177 +2562,177 @@ export class Geyser extends Contract {
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "initialize(address,address,address,address,address,tuple)"(
+    'initialize(address,address,address,address,address,tuple)'(
       ownerAddress: string,
       rewardPoolFactory: string,
       powerSwitchFactory: string,
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    initializeLock(overrides?: Overrides): Promise<BigNumber>;
+    initializeLock(overrides?: Overrides): Promise<BigNumber>
 
-    "initializeLock()"(overrides?: Overrides): Promise<BigNumber>;
+    'initializeLock()'(overrides?: Overrides): Promise<BigNumber>
 
-    isOffline(overrides?: CallOverrides): Promise<BigNumber>;
+    isOffline(overrides?: CallOverrides): Promise<BigNumber>
 
-    "isOffline()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'isOffline()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    isOnline(overrides?: CallOverrides): Promise<BigNumber>;
+    isOnline(overrides?: CallOverrides): Promise<BigNumber>
 
-    "isOnline()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'isOnline()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    isShutdown(overrides?: CallOverrides): Promise<BigNumber>;
+    isShutdown(overrides?: CallOverrides): Promise<BigNumber>
 
-    "isShutdown()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'isShutdown()'(overrides?: CallOverrides): Promise<BigNumber>
 
     isValidAddress(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "isValidAddress(address)"(
+    'isValidAddress(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    isValidVault(target: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isValidVault(target: string, overrides?: CallOverrides): Promise<BigNumber>
 
-    "isValidVault(address)"(
+    'isValidVault(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
+    owner(overrides?: CallOverrides): Promise<BigNumber>
 
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'owner()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    rageQuit(overrides?: Overrides): Promise<BigNumber>;
+    rageQuit(overrides?: Overrides): Promise<BigNumber>
 
-    "rageQuit()"(overrides?: Overrides): Promise<BigNumber>;
+    'rageQuit()'(overrides?: Overrides): Promise<BigNumber>
 
     registerBonusToken(
       bonusToken: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "registerBonusToken(address)"(
+    'registerBonusToken(address)'(
       bonusToken: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     registerVaultFactory(
       factory: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "registerVaultFactory(address)"(
+    'registerVaultFactory(address)'(
       factory: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     removeVaultFactory(
       factory: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "removeVaultFactory(address)"(
+    'removeVaultFactory(address)'(
       factory: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
+    renounceOwnership(overrides?: Overrides): Promise<BigNumber>
 
-    "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
+    'renounceOwnership()'(overrides?: Overrides): Promise<BigNumber>
 
     rescueTokensFromRewardPool(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "rescueTokensFromRewardPool(address,address,uint256)"(
+    'rescueTokensFromRewardPool(address,address,uint256)'(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     stake(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "stake(address,uint256,bytes)"(
+    'stake(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     unstakeAndClaim(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "unstakeAndClaim(address,uint256,bytes)"(
+    'unstakeAndClaim(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-  };
+      overrides?: Overrides,
+    ): Promise<BigNumber>
+  }
 
   populateTransaction: {
     BASE_SHARES_PER_WEI(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "BASE_SHARES_PER_WEI()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'BASE_SHARES_PER_WEI()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    MAX_REWARD_TOKENS(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "MAX_REWARD_TOKENS()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'MAX_REWARD_TOKENS()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     MAX_STAKES_PER_VAULT(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "MAX_STAKES_PER_VAULT()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'MAX_STAKES_PER_VAULT()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     calculateReward(
       unlockedRewards: BigNumberish,
@@ -2751,25 +2740,25 @@ export class Geyser extends Contract {
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "calculateReward(uint256,uint256,uint256,uint256,tuple)"(
+    'calculateReward(uint256,uint256,uint256,uint256,tuple)'(
       unlockedRewards: BigNumberish,
       stakeAmount: BigNumberish,
       stakeDuration: BigNumberish,
       totalStakeUnits: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     calculateRewardFromStakes(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
@@ -2778,258 +2767,254 @@ export class Geyser extends Contract {
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)"(
+    'calculateRewardFromStakes(tuple[],uint256,uint256,uint256,uint256,tuple)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       unstakeAmount: BigNumberish,
       unlockedRewards: BigNumberish,
       totalStakeUnits: BigNumberish,
       timestamp: BigNumberish,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     calculateStakeUnits(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "calculateStakeUnits(uint256,uint256,uint256)"(
+    'calculateStakeUnits(uint256,uint256,uint256)'(
       amount: BigNumberish,
       start: BigNumberish,
       end: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     calculateTotalStakeUnits(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "calculateTotalStakeUnits(tuple[],uint256)"(
+    'calculateTotalStakeUnits(tuple[],uint256)'(
       stakes: { amount: BigNumberish; timestamp: BigNumberish }[],
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     calculateUnlockedRewards(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "calculateUnlockedRewards(tuple[],uint256,uint256,uint256)"(
+    'calculateUnlockedRewards(tuple[],uint256,uint256,uint256)'(
       rewardSchedules: {
-        duration: BigNumberish;
-        start: BigNumberish;
-        shares: BigNumberish;
+        duration: BigNumberish
+        start: BigNumberish
+        shares: BigNumberish
       }[],
       rewardBalance: BigNumberish,
       sharesOutstanding: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     fundGeyser(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "fundGeyser(uint256,uint256)"(
+    'fundGeyser(uint256,uint256)'(
       amount: BigNumberish,
       duration: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     getBonusTokenAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getBonusTokenAtIndex(uint256)"(
+    'getBonusTokenAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getBonusTokenSetLength(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getBonusTokenSetLength()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getBonusTokenSetLength()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getCurrentStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getCurrentStakeReward(address,uint256)"(
+    'getCurrentStakeReward(address,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getCurrentTotalStakeUnits(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getCurrentTotalStakeUnits()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getCurrentTotalStakeUnits()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getCurrentUnlockedRewards(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getCurrentUnlockedRewards()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getCurrentUnlockedRewards()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getCurrentVaultReward(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getCurrentVaultReward(address)"(
+    'getCurrentVaultReward(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getCurrentVaultStakeUnits(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getCurrentVaultStakeUnits(address)"(
+    'getCurrentVaultStakeUnits(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getFutureStakeReward(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getFutureStakeReward(address,uint256,uint256)"(
+    'getFutureStakeReward(address,uint256,uint256)'(
       vault: string,
       stakeAmount: BigNumberish,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getFutureTotalStakeUnits(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getFutureTotalStakeUnits(uint256)"(
+    'getFutureTotalStakeUnits(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getFutureUnlockedRewards(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getFutureUnlockedRewards(uint256)"(
+    'getFutureUnlockedRewards(uint256)'(
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getFutureVaultReward(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getFutureVaultReward(address,uint256)"(
+    'getFutureVaultReward(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getFutureVaultStakeUnits(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getFutureVaultStakeUnits(address,uint256)"(
+    'getFutureVaultStakeUnits(address,uint256)'(
       vault: string,
       timestamp: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    getGeyserData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getGeyserData(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "getGeyserData()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'getGeyserData()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    getPowerController(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    getPowerController(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "getPowerController()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getPowerController()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    getPowerSwitch(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getPowerSwitch(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "getPowerSwitch()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getPowerSwitch()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
     getVaultData(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getVaultData(address)"(
+    'getVaultData(address)'(
       vault: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getVaultFactoryAtIndex(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getVaultFactoryAtIndex(uint256)"(
+    'getVaultFactoryAtIndex(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     getVaultFactorySetLength(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "getVaultFactorySetLength()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getVaultFactorySetLength()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     initialize(
       ownerAddress: string,
@@ -3038,155 +3023,155 @@ export class Geyser extends Contract {
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "initialize(address,address,address,address,address,tuple)"(
+    'initialize(address,address,address,address,address,tuple)'(
       ownerAddress: string,
       rewardPoolFactory: string,
       powerSwitchFactory: string,
       stakingToken: string,
       rewardToken: string,
       rewardScaling: {
-        floor: BigNumberish;
-        ceiling: BigNumberish;
-        time: BigNumberish;
+        floor: BigNumberish
+        ceiling: BigNumberish
+        time: BigNumberish
       },
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    initializeLock(overrides?: Overrides): Promise<PopulatedTransaction>;
+    initializeLock(overrides?: Overrides): Promise<PopulatedTransaction>
 
-    "initializeLock()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+    'initializeLock()'(overrides?: Overrides): Promise<PopulatedTransaction>
 
-    isOffline(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isOffline(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "isOffline()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'isOffline()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    isOnline(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isOnline(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "isOnline()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'isOnline()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    isShutdown(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isShutdown(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "isShutdown()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'isShutdown()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
     isValidAddress(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "isValidAddress(address)"(
+    'isValidAddress(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
     isValidVault(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "isValidVault(address)"(
+    'isValidVault(address)'(
       target: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    rageQuit(overrides?: Overrides): Promise<PopulatedTransaction>;
+    rageQuit(overrides?: Overrides): Promise<PopulatedTransaction>
 
-    "rageQuit()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+    'rageQuit()'(overrides?: Overrides): Promise<PopulatedTransaction>
 
     registerBonusToken(
       bonusToken: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "registerBonusToken(address)"(
+    'registerBonusToken(address)'(
       bonusToken: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     registerVaultFactory(
       factory: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "registerVaultFactory(address)"(
+    'registerVaultFactory(address)'(
       factory: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     removeVaultFactory(
       factory: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "removeVaultFactory(address)"(
+    'removeVaultFactory(address)'(
       factory: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
+    renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>
 
-    "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+    'renounceOwnership()'(overrides?: Overrides): Promise<PopulatedTransaction>
 
     rescueTokensFromRewardPool(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "rescueTokensFromRewardPool(address,address,uint256)"(
+    'rescueTokensFromRewardPool(address,address,uint256)'(
       token: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     stake(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "stake(address,uint256,bytes)"(
+    'stake(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     unstakeAndClaim(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "unstakeAndClaim(address,uint256,bytes)"(
+    'unstakeAndClaim(address,uint256,bytes)'(
       vault: string,
       amount: BigNumberish,
       permission: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-  };
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
+  }
 }

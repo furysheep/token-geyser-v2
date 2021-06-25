@@ -9,182 +9,182 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
+} from 'ethers'
 import {
   Contract,
   ContractTransaction,
   CallOverrides,
-} from "@ethersproject/contracts";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+} from '@ethersproject/contracts'
+import { BytesLike } from '@ethersproject/bytes'
+import { Listener, Provider } from '@ethersproject/providers'
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
 
 interface InstanceRegistryInterface extends ethers.utils.Interface {
   functions: {
-    "instanceAt(uint256)": FunctionFragment;
-    "instanceCount()": FunctionFragment;
-    "isInstance(address)": FunctionFragment;
-  };
+    'instanceAt(uint256)': FunctionFragment
+    'instanceCount()': FunctionFragment
+    'isInstance(address)': FunctionFragment
+  }
 
   encodeFunctionData(
-    functionFragment: "instanceAt",
-    values: [BigNumberish]
-  ): string;
+    functionFragment: 'instanceAt',
+    values: [BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "instanceCount",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "isInstance", values: [string]): string;
+    functionFragment: 'instanceCount',
+    values?: undefined,
+  ): string
+  encodeFunctionData(functionFragment: 'isInstance', values: [string]): string
 
-  decodeFunctionResult(functionFragment: "instanceAt", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'instanceAt', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "instanceCount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "isInstance", data: BytesLike): Result;
+    functionFragment: 'instanceCount',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'isInstance', data: BytesLike): Result
 
   events: {
-    "InstanceAdded(address)": EventFragment;
-    "InstanceRemoved(address)": EventFragment;
-  };
+    'InstanceAdded(address)': EventFragment
+    'InstanceRemoved(address)': EventFragment
+  }
 
-  getEvent(nameOrSignatureOrTopic: "InstanceAdded"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "InstanceRemoved"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'InstanceAdded'): EventFragment
+  getEvent(nameOrSignatureOrTopic: 'InstanceRemoved'): EventFragment
 }
 
 export class InstanceRegistry extends Contract {
-  connect(signerOrProvider: Signer | Provider | string): this;
-  attach(addressOrName: string): this;
-  deployed(): Promise<this>;
+  connect(signerOrProvider: Signer | Provider | string): this
+  attach(addressOrName: string): this
+  deployed(): Promise<this>
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  on(event: EventFilter | string, listener: Listener): this
+  once(event: EventFilter | string, listener: Listener): this
+  addListener(eventName: EventFilter | string, listener: Listener): this
+  removeAllListeners(eventName: EventFilter | string): this
+  removeListener(eventName: any, listener: Listener): this
 
-  interface: InstanceRegistryInterface;
+  interface: InstanceRegistryInterface
 
   functions: {
     instanceAt(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string] & { instance: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { instance: string }>
 
-    "instanceAt(uint256)"(
+    'instanceAt(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string] & { instance: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { instance: string }>
 
     instanceCount(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { count: BigNumber }>;
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { count: BigNumber }>
 
-    "instanceCount()"(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { count: BigNumber }>;
+    'instanceCount()'(
+      overrides?: CallOverrides,
+    ): Promise<[BigNumber] & { count: BigNumber }>
 
     isInstance(
       instance: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { validity: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { validity: boolean }>
 
-    "isInstance(address)"(
+    'isInstance(address)'(
       instance: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { validity: boolean }>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { validity: boolean }>
+  }
 
-  instanceAt(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  instanceAt(index: BigNumberish, overrides?: CallOverrides): Promise<string>
 
-  "instanceAt(uint256)"(
+  'instanceAt(uint256)'(
     index: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: CallOverrides,
+  ): Promise<string>
 
-  instanceCount(overrides?: CallOverrides): Promise<BigNumber>;
+  instanceCount(overrides?: CallOverrides): Promise<BigNumber>
 
-  "instanceCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'instanceCount()'(overrides?: CallOverrides): Promise<BigNumber>
 
-  isInstance(instance: string, overrides?: CallOverrides): Promise<boolean>;
+  isInstance(instance: string, overrides?: CallOverrides): Promise<boolean>
 
-  "isInstance(address)"(
+  'isInstance(address)'(
     instance: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+    overrides?: CallOverrides,
+  ): Promise<boolean>
 
   callStatic: {
-    instanceAt(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    instanceAt(index: BigNumberish, overrides?: CallOverrides): Promise<string>
 
-    "instanceAt(uint256)"(
+    'instanceAt(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
+      overrides?: CallOverrides,
+    ): Promise<string>
 
-    instanceCount(overrides?: CallOverrides): Promise<BigNumber>;
+    instanceCount(overrides?: CallOverrides): Promise<BigNumber>
 
-    "instanceCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'instanceCount()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    isInstance(instance: string, overrides?: CallOverrides): Promise<boolean>;
+    isInstance(instance: string, overrides?: CallOverrides): Promise<boolean>
 
-    "isInstance(address)"(
+    'isInstance(address)'(
       instance: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<boolean>
+  }
 
   filters: {
-    InstanceAdded(instance: null): EventFilter;
+    InstanceAdded(instance: null): EventFilter
 
-    InstanceRemoved(instance: null): EventFilter;
-  };
+    InstanceRemoved(instance: null): EventFilter
+  }
 
   estimateGas: {
     instanceAt(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "instanceAt(uint256)"(
+    'instanceAt(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    instanceCount(overrides?: CallOverrides): Promise<BigNumber>;
+    instanceCount(overrides?: CallOverrides): Promise<BigNumber>
 
-    "instanceCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'instanceCount()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    isInstance(instance: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isInstance(instance: string, overrides?: CallOverrides): Promise<BigNumber>
 
-    "isInstance(address)"(
+    'isInstance(address)'(
       instance: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
+  }
 
   populateTransaction: {
     instanceAt(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "instanceAt(uint256)"(
+    'instanceAt(uint256)'(
       index: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    instanceCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    instanceCount(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "instanceCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'instanceCount()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
     isInstance(
       instance: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "isInstance(address)"(
+    'isInstance(address)'(
       instance: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
+  }
 }

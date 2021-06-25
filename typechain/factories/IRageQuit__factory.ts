@@ -2,26 +2,26 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers'
+import { Provider } from '@ethersproject/providers'
 
-import type { IRageQuit } from "../IRageQuit";
+import type { IRageQuit } from '../IRageQuit'
 
 export class IRageQuit__factory {
   static connect(
     address: string,
-    signerOrProvider: Signer | Provider
+    signerOrProvider: Signer | Provider,
   ): IRageQuit {
-    return new Contract(address, _abi, signerOrProvider) as IRageQuit;
+    return new Contract(address, _abi, signerOrProvider) as IRageQuit
   }
 }
 
 const _abi = [
   {
     inputs: [],
-    name: "rageQuit",
+    name: 'rageQuit',
     outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
-];
+]

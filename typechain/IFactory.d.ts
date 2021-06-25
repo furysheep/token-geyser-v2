@@ -9,153 +9,147 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
+} from 'ethers'
 import {
   Contract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+} from '@ethersproject/contracts'
+import { BytesLike } from '@ethersproject/bytes'
+import { Listener, Provider } from '@ethersproject/providers'
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
 
 interface IFactoryInterface extends ethers.utils.Interface {
   functions: {
-    "create(bytes)": FunctionFragment;
-    "create2(bytes,bytes32)": FunctionFragment;
-  };
+    'create(bytes)': FunctionFragment
+    'create2(bytes,bytes32)': FunctionFragment
+  }
 
-  encodeFunctionData(functionFragment: "create", values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: 'create', values: [BytesLike]): string
   encodeFunctionData(
-    functionFragment: "create2",
-    values: [BytesLike, BytesLike]
-  ): string;
+    functionFragment: 'create2',
+    values: [BytesLike, BytesLike],
+  ): string
 
-  decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "create2", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'create', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'create2', data: BytesLike): Result
 
-  events: {};
+  events: {}
 }
 
 export class IFactory extends Contract {
-  connect(signerOrProvider: Signer | Provider | string): this;
-  attach(addressOrName: string): this;
-  deployed(): Promise<this>;
+  connect(signerOrProvider: Signer | Provider | string): this
+  attach(addressOrName: string): this
+  deployed(): Promise<this>
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  on(event: EventFilter | string, listener: Listener): this
+  once(event: EventFilter | string, listener: Listener): this
+  addListener(eventName: EventFilter | string, listener: Listener): this
+  removeAllListeners(eventName: EventFilter | string): this
+  removeListener(eventName: any, listener: Listener): this
 
-  interface: IFactoryInterface;
+  interface: IFactoryInterface
 
   functions: {
-    create(
-      args: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+    create(args: BytesLike, overrides?: Overrides): Promise<ContractTransaction>
 
-    "create(bytes)"(
+    'create(bytes)'(
       args: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     create2(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "create2(bytes,bytes32)"(
+    'create2(bytes,bytes32)'(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-  };
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
+  }
 
-  create(args: BytesLike, overrides?: Overrides): Promise<ContractTransaction>;
+  create(args: BytesLike, overrides?: Overrides): Promise<ContractTransaction>
 
-  "create(bytes)"(
+  'create(bytes)'(
     args: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   create2(
     args: BytesLike,
     salt: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "create2(bytes,bytes32)"(
+  'create2(bytes,bytes32)'(
     args: BytesLike,
     salt: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   callStatic: {
-    create(args: BytesLike, overrides?: CallOverrides): Promise<string>;
+    create(args: BytesLike, overrides?: CallOverrides): Promise<string>
 
-    "create(bytes)"(
-      args: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    'create(bytes)'(args: BytesLike, overrides?: CallOverrides): Promise<string>
 
     create2(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
+      overrides?: CallOverrides,
+    ): Promise<string>
 
-    "create2(bytes,bytes32)"(
+    'create2(bytes,bytes32)'(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<string>
+  }
 
-  filters: {};
+  filters: {}
 
   estimateGas: {
-    create(args: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    create(args: BytesLike, overrides?: Overrides): Promise<BigNumber>
 
-    "create(bytes)"(args: BytesLike, overrides?: Overrides): Promise<BigNumber>;
+    'create(bytes)'(args: BytesLike, overrides?: Overrides): Promise<BigNumber>
 
     create2(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "create2(bytes,bytes32)"(
+    'create2(bytes,bytes32)'(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-  };
+      overrides?: Overrides,
+    ): Promise<BigNumber>
+  }
 
   populateTransaction: {
     create(
       args: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "create(bytes)"(
+    'create(bytes)'(
       args: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     create2(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "create2(bytes,bytes32)"(
+    'create2(bytes,bytes32)'(
       args: BytesLike,
       salt: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-  };
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
+  }
 }

@@ -9,467 +9,457 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
+} from 'ethers'
 import {
   Contract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+} from '@ethersproject/contracts'
+import { BytesLike } from '@ethersproject/bytes'
+import { Listener, Provider } from '@ethersproject/providers'
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
 
 interface RewardPoolInterface extends ethers.utils.Interface {
   functions: {
-    "getPowerController()": FunctionFragment;
-    "getPowerSwitch()": FunctionFragment;
-    "isOffline()": FunctionFragment;
-    "isOnline()": FunctionFragment;
-    "isShutdown()": FunctionFragment;
-    "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
-    "rescueERC20(address[],address)": FunctionFragment;
-    "sendERC20(address,address,uint256)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
-  };
+    'getPowerController()': FunctionFragment
+    'getPowerSwitch()': FunctionFragment
+    'isOffline()': FunctionFragment
+    'isOnline()': FunctionFragment
+    'isShutdown()': FunctionFragment
+    'owner()': FunctionFragment
+    'renounceOwnership()': FunctionFragment
+    'rescueERC20(address[],address)': FunctionFragment
+    'sendERC20(address,address,uint256)': FunctionFragment
+    'transferOwnership(address)': FunctionFragment
+  }
 
   encodeFunctionData(
-    functionFragment: "getPowerController",
-    values?: undefined
-  ): string;
+    functionFragment: 'getPowerController',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "getPowerSwitch",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "isOffline", values?: undefined): string;
-  encodeFunctionData(functionFragment: "isOnline", values?: undefined): string;
+    functionFragment: 'getPowerSwitch',
+    values?: undefined,
+  ): string
+  encodeFunctionData(functionFragment: 'isOffline', values?: undefined): string
+  encodeFunctionData(functionFragment: 'isOnline', values?: undefined): string
+  encodeFunctionData(functionFragment: 'isShutdown', values?: undefined): string
+  encodeFunctionData(functionFragment: 'owner', values?: undefined): string
   encodeFunctionData(
-    functionFragment: "isShutdown",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+    functionFragment: 'renounceOwnership',
+    values?: undefined,
+  ): string
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
+    functionFragment: 'rescueERC20',
+    values: [string[], string],
+  ): string
   encodeFunctionData(
-    functionFragment: "rescueERC20",
-    values: [string[], string]
-  ): string;
+    functionFragment: 'sendERC20',
+    values: [string, string, BigNumberish],
+  ): string
   encodeFunctionData(
-    functionFragment: "sendERC20",
-    values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [string]
-  ): string;
+    functionFragment: 'transferOwnership',
+    values: [string],
+  ): string
 
   decodeFunctionResult(
-    functionFragment: "getPowerController",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'getPowerController',
+    data: BytesLike,
+  ): Result
   decodeFunctionResult(
-    functionFragment: "getPowerSwitch",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "isOffline", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isOnline", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isShutdown", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+    functionFragment: 'getPowerSwitch',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'isOffline', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'isOnline', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'isShutdown', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'renounceOwnership',
+    data: BytesLike,
+  ): Result
+  decodeFunctionResult(functionFragment: 'rescueERC20', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'sendERC20', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: "rescueERC20",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "sendERC20", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'transferOwnership',
+    data: BytesLike,
+  ): Result
 
   events: {
-    "OwnershipTransferred(address,address)": EventFragment;
-  };
+    'OwnershipTransferred(address,address)': EventFragment
+  }
 
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment
 }
 
 export class RewardPool extends Contract {
-  connect(signerOrProvider: Signer | Provider | string): this;
-  attach(addressOrName: string): this;
-  deployed(): Promise<this>;
+  connect(signerOrProvider: Signer | Provider | string): this
+  attach(addressOrName: string): this
+  deployed(): Promise<this>
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  on(event: EventFilter | string, listener: Listener): this
+  once(event: EventFilter | string, listener: Listener): this
+  addListener(eventName: EventFilter | string, listener: Listener): this
+  removeAllListeners(eventName: EventFilter | string): this
+  removeListener(eventName: any, listener: Listener): this
 
-  interface: RewardPoolInterface;
+  interface: RewardPoolInterface
 
   functions: {
     getPowerController(
-      overrides?: CallOverrides
-    ): Promise<[string] & { controller: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { controller: string }>
 
-    "getPowerController()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { controller: string }>;
+    'getPowerController()'(
+      overrides?: CallOverrides,
+    ): Promise<[string] & { controller: string }>
 
     getPowerSwitch(
-      overrides?: CallOverrides
-    ): Promise<[string] & { powerSwitch: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { powerSwitch: string }>
 
-    "getPowerSwitch()"(
-      overrides?: CallOverrides
-    ): Promise<[string] & { powerSwitch: string }>;
+    'getPowerSwitch()'(
+      overrides?: CallOverrides,
+    ): Promise<[string] & { powerSwitch: string }>
 
     isOffline(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
-    "isOffline()"(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+    'isOffline()'(
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
     isOnline(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
-    "isOnline()"(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+    'isOnline()'(
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
     isShutdown(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
-    "isShutdown()"(
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { status: boolean }>;
+    'isShutdown()'(
+      overrides?: CallOverrides,
+    ): Promise<[boolean] & { status: boolean }>
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
+    owner(overrides?: CallOverrides): Promise<[string]>
 
-    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+    'owner()'(overrides?: CallOverrides): Promise<[string]>
 
-    renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
+    renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>
 
-    "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+    'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>
 
     rescueERC20(
       tokens: string[],
       recipient: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "rescueERC20(address[],address)"(
+    'rescueERC20(address[],address)'(
       tokens: string[],
       recipient: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     sendERC20(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "sendERC20(address,address,uint256)"(
+    'sendERC20(address,address,uint256)'(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-  };
+      overrides?: Overrides,
+    ): Promise<ContractTransaction>
+  }
 
-  getPowerController(overrides?: CallOverrides): Promise<string>;
+  getPowerController(overrides?: CallOverrides): Promise<string>
 
-  "getPowerController()"(overrides?: CallOverrides): Promise<string>;
+  'getPowerController()'(overrides?: CallOverrides): Promise<string>
 
-  getPowerSwitch(overrides?: CallOverrides): Promise<string>;
+  getPowerSwitch(overrides?: CallOverrides): Promise<string>
 
-  "getPowerSwitch()"(overrides?: CallOverrides): Promise<string>;
+  'getPowerSwitch()'(overrides?: CallOverrides): Promise<string>
 
-  isOffline(overrides?: CallOverrides): Promise<boolean>;
+  isOffline(overrides?: CallOverrides): Promise<boolean>
 
-  "isOffline()"(overrides?: CallOverrides): Promise<boolean>;
+  'isOffline()'(overrides?: CallOverrides): Promise<boolean>
 
-  isOnline(overrides?: CallOverrides): Promise<boolean>;
+  isOnline(overrides?: CallOverrides): Promise<boolean>
 
-  "isOnline()"(overrides?: CallOverrides): Promise<boolean>;
+  'isOnline()'(overrides?: CallOverrides): Promise<boolean>
 
-  isShutdown(overrides?: CallOverrides): Promise<boolean>;
+  isShutdown(overrides?: CallOverrides): Promise<boolean>
 
-  "isShutdown()"(overrides?: CallOverrides): Promise<boolean>;
+  'isShutdown()'(overrides?: CallOverrides): Promise<boolean>
 
-  owner(overrides?: CallOverrides): Promise<string>;
+  owner(overrides?: CallOverrides): Promise<string>
 
-  "owner()"(overrides?: CallOverrides): Promise<string>;
+  'owner()'(overrides?: CallOverrides): Promise<string>
 
-  renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
+  renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>
 
-  "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
+  'renounceOwnership()'(overrides?: Overrides): Promise<ContractTransaction>
 
   rescueERC20(
     tokens: string[],
     recipient: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "rescueERC20(address[],address)"(
+  'rescueERC20(address[],address)'(
     tokens: string[],
     recipient: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   sendERC20(
     token: string,
     to: string,
     value: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "sendERC20(address,address,uint256)"(
+  'sendERC20(address,address,uint256)'(
     token: string,
     to: string,
     value: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   transferOwnership(
     newOwner: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
-  "transferOwnership(address)"(
+  'transferOwnership(address)'(
     newOwner: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
+    overrides?: Overrides,
+  ): Promise<ContractTransaction>
 
   callStatic: {
-    getPowerController(overrides?: CallOverrides): Promise<string>;
+    getPowerController(overrides?: CallOverrides): Promise<string>
 
-    "getPowerController()"(overrides?: CallOverrides): Promise<string>;
+    'getPowerController()'(overrides?: CallOverrides): Promise<string>
 
-    getPowerSwitch(overrides?: CallOverrides): Promise<string>;
+    getPowerSwitch(overrides?: CallOverrides): Promise<string>
 
-    "getPowerSwitch()"(overrides?: CallOverrides): Promise<string>;
+    'getPowerSwitch()'(overrides?: CallOverrides): Promise<string>
 
-    isOffline(overrides?: CallOverrides): Promise<boolean>;
+    isOffline(overrides?: CallOverrides): Promise<boolean>
 
-    "isOffline()"(overrides?: CallOverrides): Promise<boolean>;
+    'isOffline()'(overrides?: CallOverrides): Promise<boolean>
 
-    isOnline(overrides?: CallOverrides): Promise<boolean>;
+    isOnline(overrides?: CallOverrides): Promise<boolean>
 
-    "isOnline()"(overrides?: CallOverrides): Promise<boolean>;
+    'isOnline()'(overrides?: CallOverrides): Promise<boolean>
 
-    isShutdown(overrides?: CallOverrides): Promise<boolean>;
+    isShutdown(overrides?: CallOverrides): Promise<boolean>
 
-    "isShutdown()"(overrides?: CallOverrides): Promise<boolean>;
+    'isShutdown()'(overrides?: CallOverrides): Promise<boolean>
 
-    owner(overrides?: CallOverrides): Promise<string>;
+    owner(overrides?: CallOverrides): Promise<string>
 
-    "owner()"(overrides?: CallOverrides): Promise<string>;
+    'owner()'(overrides?: CallOverrides): Promise<string>
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    renounceOwnership(overrides?: CallOverrides): Promise<void>
 
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>
 
     rescueERC20(
       tokens: string[],
       recipient: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "rescueERC20(address[],address)"(
+    'rescueERC20(address[],address)'(
       tokens: string[],
       recipient: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     sendERC20(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "sendERC20(address,address,uint256)"(
+    'sendERC20(address,address,uint256)'(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
     transferOwnership(
       newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+      overrides?: CallOverrides,
+    ): Promise<void>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<void>
+  }
 
   filters: {
     OwnershipTransferred(
       previousOwner: string | null,
-      newOwner: string | null
-    ): EventFilter;
-  };
+      newOwner: string | null,
+    ): EventFilter
+  }
 
   estimateGas: {
-    getPowerController(overrides?: CallOverrides): Promise<BigNumber>;
+    getPowerController(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getPowerController()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getPowerController()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    getPowerSwitch(overrides?: CallOverrides): Promise<BigNumber>;
+    getPowerSwitch(overrides?: CallOverrides): Promise<BigNumber>
 
-    "getPowerSwitch()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getPowerSwitch()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    isOffline(overrides?: CallOverrides): Promise<BigNumber>;
+    isOffline(overrides?: CallOverrides): Promise<BigNumber>
 
-    "isOffline()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'isOffline()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    isOnline(overrides?: CallOverrides): Promise<BigNumber>;
+    isOnline(overrides?: CallOverrides): Promise<BigNumber>
 
-    "isOnline()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'isOnline()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    isShutdown(overrides?: CallOverrides): Promise<BigNumber>;
+    isShutdown(overrides?: CallOverrides): Promise<BigNumber>
 
-    "isShutdown()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'isShutdown()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
+    owner(overrides?: CallOverrides): Promise<BigNumber>
 
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'owner()'(overrides?: CallOverrides): Promise<BigNumber>
 
-    renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
+    renounceOwnership(overrides?: Overrides): Promise<BigNumber>
 
-    "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
+    'renounceOwnership()'(overrides?: Overrides): Promise<BigNumber>
 
     rescueERC20(
       tokens: string[],
       recipient: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "rescueERC20(address[],address)"(
+    'rescueERC20(address[],address)'(
       tokens: string[],
       recipient: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     sendERC20(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "sendERC20(address,address,uint256)"(
+    'sendERC20(address,address,uint256)'(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
+      overrides?: Overrides,
+    ): Promise<BigNumber>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-  };
+      overrides?: Overrides,
+    ): Promise<BigNumber>
+  }
 
   populateTransaction: {
-    getPowerController(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    getPowerController(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "getPowerController()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getPowerController()'(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    getPowerSwitch(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getPowerSwitch(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "getPowerSwitch()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getPowerSwitch()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    isOffline(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isOffline(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "isOffline()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'isOffline()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    isOnline(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isOnline(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "isOnline()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'isOnline()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    isShutdown(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isShutdown(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "isShutdown()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'isShutdown()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>
 
-    renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
+    renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>
 
-    "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+    'renounceOwnership()'(overrides?: Overrides): Promise<PopulatedTransaction>
 
     rescueERC20(
       tokens: string[],
       recipient: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "rescueERC20(address[],address)"(
+    'rescueERC20(address[],address)'(
       tokens: string[],
       recipient: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     sendERC20(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "sendERC20(address,address,uint256)"(
+    'sendERC20(address,address,uint256)'(
       token: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
 
-    "transferOwnership(address)"(
+    'transferOwnership(address)'(
       newOwner: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-  };
+      overrides?: Overrides,
+    ): Promise<PopulatedTransaction>
+  }
 }

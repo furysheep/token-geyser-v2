@@ -2,17 +2,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers'
+import { Provider } from '@ethersproject/providers'
 
-import type { IRewardPool } from "../IRewardPool";
+import type { IRewardPool } from '../IRewardPool'
 
 export class IRewardPool__factory {
   static connect(
     address: string,
-    signerOrProvider: Signer | Provider
+    signerOrProvider: Signer | Provider,
   ): IRewardPool {
-    return new Contract(address, _abi, signerOrProvider) as IRewardPool;
+    return new Contract(address, _abi, signerOrProvider) as IRewardPool
   }
 }
 
@@ -20,42 +20,42 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address[]",
-        name: "tokens",
-        type: "address[]",
+        internalType: 'address[]',
+        name: 'tokens',
+        type: 'address[]',
       },
       {
-        internalType: "address",
-        name: "recipient",
-        type: "address",
+        internalType: 'address',
+        name: 'recipient',
+        type: 'address',
       },
     ],
-    name: "rescueERC20",
+    name: 'rescueERC20',
     outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
+        internalType: 'address',
+        name: 'token',
+        type: 'address',
       },
       {
-        internalType: "address",
-        name: "to",
-        type: "address",
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
       },
       {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'value',
+        type: 'uint256',
       },
     ],
-    name: "sendERC20",
+    name: 'sendERC20',
     outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
-];
+]

@@ -2,17 +2,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers'
+import { Provider } from '@ethersproject/providers'
 
-import type { IFactory } from "../IFactory";
+import type { IFactory } from '../IFactory'
 
 export class IFactory__factory {
   static connect(
     address: string,
-    signerOrProvider: Signer | Provider
+    signerOrProvider: Signer | Provider,
   ): IFactory {
-    return new Contract(address, _abi, signerOrProvider) as IFactory;
+    return new Contract(address, _abi, signerOrProvider) as IFactory
   }
 }
 
@@ -20,44 +20,44 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "bytes",
-        name: "args",
-        type: "bytes",
+        internalType: 'bytes',
+        name: 'args',
+        type: 'bytes',
       },
     ],
-    name: "create",
+    name: 'create',
     outputs: [
       {
-        internalType: "address",
-        name: "instance",
-        type: "address",
+        internalType: 'address',
+        name: 'instance',
+        type: 'address',
       },
     ],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "bytes",
-        name: "args",
-        type: "bytes",
+        internalType: 'bytes',
+        name: 'args',
+        type: 'bytes',
       },
       {
-        internalType: "bytes32",
-        name: "salt",
-        type: "bytes32",
+        internalType: 'bytes32',
+        name: 'salt',
+        type: 'bytes32',
       },
     ],
-    name: "create2",
+    name: 'create2',
     outputs: [
       {
-        internalType: "address",
-        name: "instance",
-        type: "address",
+        internalType: 'address',
+        name: 'instance',
+        type: 'address',
       },
     ],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
-];
+]

@@ -2,65 +2,65 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Signer } from "ethers";
-import { Provider, TransactionRequest } from "@ethersproject/providers";
-import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
+import { Signer } from 'ethers'
+import { Provider, TransactionRequest } from '@ethersproject/providers'
+import { Contract, ContractFactory, Overrides } from '@ethersproject/contracts'
 
-import type { OwnableERC721 } from "../OwnableERC721";
+import type { OwnableERC721 } from '../OwnableERC721'
 
 export class OwnableERC721__factory extends ContractFactory {
   constructor(signer?: Signer) {
-    super(_abi, _bytecode, signer);
+    super(_abi, _bytecode, signer)
   }
 
   deploy(overrides?: Overrides): Promise<OwnableERC721> {
-    return super.deploy(overrides || {}) as Promise<OwnableERC721>;
+    return super.deploy(overrides || {}) as Promise<OwnableERC721>
   }
   getDeployTransaction(overrides?: Overrides): TransactionRequest {
-    return super.getDeployTransaction(overrides || {});
+    return super.getDeployTransaction(overrides || {})
   }
   attach(address: string): OwnableERC721 {
-    return super.attach(address) as OwnableERC721;
+    return super.attach(address) as OwnableERC721
   }
   connect(signer: Signer): OwnableERC721__factory {
-    return super.connect(signer) as OwnableERC721__factory;
+    return super.connect(signer) as OwnableERC721__factory
   }
   static connect(
     address: string,
-    signerOrProvider: Signer | Provider
+    signerOrProvider: Signer | Provider,
   ): OwnableERC721 {
-    return new Contract(address, _abi, signerOrProvider) as OwnableERC721;
+    return new Contract(address, _abi, signerOrProvider) as OwnableERC721
   }
 }
 
 const _abi = [
   {
     inputs: [],
-    name: "nft",
+    name: 'nft',
     outputs: [
       {
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
+        internalType: 'address',
+        name: 'nftAddress',
+        type: 'address',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [],
-    name: "owner",
+    name: 'owner',
     outputs: [
       {
-        internalType: "address",
-        name: "ownerAddress",
-        type: "address",
+        internalType: 'address',
+        name: 'ownerAddress',
+        type: 'address',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
-];
+]
 
 const _bytecode =
-  "0x608060405234801561001057600080fd5b50610169806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806347ccca021461003b5780638da5cb5b1461006c575b600080fd5b610043610074565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b610043610090565b60005473ffffffffffffffffffffffffffffffffffffffff1690565b60008054604080517f6352211e000000000000000000000000000000000000000000000000000000008152306004820152905173ffffffffffffffffffffffffffffffffffffffff90921691636352211e91602480820192602092909190829003018186803b15801561010257600080fd5b505afa158015610116573d6000803e3d6000fd5b505050506040513d602081101561012c57600080fd5b505190509056fea2646970667358221220cbe31a930e0554bba36a3d1abf9cc3a4f3c3d490e449dfd3597f257a9a25369264736f6c63430007060033";
+  '0x608060405234801561001057600080fd5b50610169806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806347ccca021461003b5780638da5cb5b1461006c575b600080fd5b610043610074565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b610043610090565b60005473ffffffffffffffffffffffffffffffffffffffff1690565b60008054604080517f6352211e000000000000000000000000000000000000000000000000000000008152306004820152905173ffffffffffffffffffffffffffffffffffffffff90921691636352211e91602480820192602092909190829003018186803b15801561010257600080fd5b505afa158015610116573d6000803e3d6000fd5b505050506040513d602081101561012c57600080fd5b505190509056fea2646970667358221220cbe31a930e0554bba36a3d1abf9cc3a4f3c3d490e449dfd3597f257a9a25369264736f6c63430007060033'

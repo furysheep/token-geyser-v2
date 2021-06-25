@@ -9,114 +9,114 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
+} from 'ethers'
 import {
   Contract,
   ContractTransaction,
   CallOverrides,
-} from "@ethersproject/contracts";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+} from '@ethersproject/contracts'
+import { BytesLike } from '@ethersproject/bytes'
+import { Listener, Provider } from '@ethersproject/providers'
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
 
 interface IERC1271Interface extends ethers.utils.Interface {
   functions: {
-    "isValidSignature(bytes32,bytes)": FunctionFragment;
-  };
+    'isValidSignature(bytes32,bytes)': FunctionFragment
+  }
 
   encodeFunctionData(
-    functionFragment: "isValidSignature",
-    values: [BytesLike, BytesLike]
-  ): string;
+    functionFragment: 'isValidSignature',
+    values: [BytesLike, BytesLike],
+  ): string
 
   decodeFunctionResult(
-    functionFragment: "isValidSignature",
-    data: BytesLike
-  ): Result;
+    functionFragment: 'isValidSignature',
+    data: BytesLike,
+  ): Result
 
-  events: {};
+  events: {}
 }
 
 export class IERC1271 extends Contract {
-  connect(signerOrProvider: Signer | Provider | string): this;
-  attach(addressOrName: string): this;
-  deployed(): Promise<this>;
+  connect(signerOrProvider: Signer | Provider | string): this
+  attach(addressOrName: string): this
+  deployed(): Promise<this>
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  on(event: EventFilter | string, listener: Listener): this
+  once(event: EventFilter | string, listener: Listener): this
+  addListener(eventName: EventFilter | string, listener: Listener): this
+  removeAllListeners(eventName: EventFilter | string): this
+  removeListener(eventName: any, listener: Listener): this
 
-  interface: IERC1271Interface;
+  interface: IERC1271Interface
 
   functions: {
     isValidSignature(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string] & { magicValue: string }>;
+      overrides?: CallOverrides,
+    ): Promise<[string] & { magicValue: string }>
 
-    "isValidSignature(bytes32,bytes)"(
+    'isValidSignature(bytes32,bytes)'(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[string] & { magicValue: string }>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<[string] & { magicValue: string }>
+  }
 
   isValidSignature(
     _messageHash: BytesLike,
     _signature: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: CallOverrides,
+  ): Promise<string>
 
-  "isValidSignature(bytes32,bytes)"(
+  'isValidSignature(bytes32,bytes)'(
     _messageHash: BytesLike,
     _signature: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: CallOverrides,
+  ): Promise<string>
 
   callStatic: {
     isValidSignature(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
+      overrides?: CallOverrides,
+    ): Promise<string>
 
-    "isValidSignature(bytes32,bytes)"(
+    'isValidSignature(bytes32,bytes)'(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<string>
+  }
 
-  filters: {};
+  filters: {}
 
   estimateGas: {
     isValidSignature(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
 
-    "isValidSignature(bytes32,bytes)"(
+    'isValidSignature(bytes32,bytes)'(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>
+  }
 
   populateTransaction: {
     isValidSignature(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
 
-    "isValidSignature(bytes32,bytes)"(
+    'isValidSignature(bytes32,bytes)'(
       _messageHash: BytesLike,
       _signature: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-  };
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>
+  }
 }
