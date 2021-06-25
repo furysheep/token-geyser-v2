@@ -4,13 +4,15 @@ import '@nomiclabs/hardhat-waffle'
 import '@openzeppelin/hardhat-upgrades'
 import 'hardhat-gas-reporter'
 import 'solidity-coverage'
-import { resolve } from "path";
+// import 'hardhat-typechain'
+import { resolve } from 'path'
 import { Contract, Signer, Wallet } from 'ethers'
 import { mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { HardhatUserConfig, task } from 'hardhat/config'
-import { config as dotenvConfig } from "dotenv";
+import { config as dotenvConfig } from 'dotenv'
+import { VaultFactory } from './typechain';
 
-dotenvConfig({ path: resolve(__dirname, "./.env") });
+dotenvConfig({ path: resolve(__dirname, './.env') })
 
 async function deployContract(
   name: string,
@@ -33,13 +35,14 @@ async function createInstance(
   signer: Signer,
   args: string = '0x',
 ) {
+  console.log(instanceName, signer, args, factory.address);
   // get contract class
   const instance = await getContractAt(
     instanceName,
-    await factory.connect(await signer.getAddress()).callStatic['create(bytes)'](args),
+    await factory.connect(signer).callStatic['create(bytes)'](args),
   )
   // deploy vault
-  const tx = await factory.connect(await signer.getAddress())['create(bytes)'](args)
+  const tx = await factory.connect(signer)['create(bytes)'](args)
   // return contract class
   console.log('Deploying', instanceName)
   console.log('  to', instance.address)
@@ -60,33 +63,33 @@ task('deploy', 'deploy full set of factory contracts').setAction(
     const PowerSwitchFactory = await deployContract(
       'PowerSwitchFactory',
       ethers.getContractFactory,
-      signer as Signer,
+      signer,
     )
     const RewardPoolFactory = await deployContract(
       'RewardPoolFactory',
       ethers.getContractFactory,
-      signer as Signer,
+      signer,
     )
     const UniversalVault = await deployContract(
       'UniversalVault',
       ethers.getContractFactory,
-      signer as Signer,
+      signer,
     )
     const VaultFactory = await deployContract(
       'VaultFactory',
       ethers.getContractFactory,
-      signer as Signer,
+      signer,
       [UniversalVault.address],
     )
     const GeyserRegistry = await deployContract(
       'GeyserRegistry',
       ethers.getContractFactory,
-      signer as Signer,
+      signer,
     )
     const RouterV1 = await deployContract(
       'RouterV1',
       ethers.getContractFactory,
-      signer as Signer,
+      signer,
     )
 
     console.log('Locking template')
@@ -173,15 +176,15 @@ task('create-vault', 'deploy an instance of UniversalVault')
 
     const vaultFactory = await ethers.getContractAt(
       'VaultFactory',
-      VaultFactory,
-      signer as Signer,
+      VaultFactory.address,
+      signer,
     )
 
     await createInstance(
       'UniversalVault',
       vaultFactory,
       ethers.getContractAt,
-      signer as Signer,
+      signer,
     )
   })
 
@@ -216,14 +219,15 @@ task('create-geyser', 'deploy an instance of Geyser')
 
       const args = [
         signer.address,
-        RewardPoolFactory,
-        PowerSwitchFactory,
+        RewardPoolFactory.address,
+        PowerSwitchFactory.address,
         stakingToken,
         rewardToken,
         [floor, ceiling, time],
       ] as Array<any>
 
-      const factory = await ethers.getContractFactory('Geyser', signer as Signer)
+      const factory = await ethers.getContractFactory('Geyser', signer)
+      console.log('args: ', args)
       const geyser = await upgrades.deployProxy(factory, args, {
         unsafeAllowCustomTypes: true,
       })
@@ -239,14 +243,14 @@ task('create-geyser', 'deploy an instance of Geyser')
 
       console.log('Register Vault Factory')
 
-      await geyser.registerVaultFactory(VaultFactory)
+      await geyser.registerVaultFactory(VaultFactory.address)
 
       console.log('Register Geyser Instance')
 
       const geyserRegistry = await ethers.getContractAt(
         'GeyserRegistry',
-        GeyserRegistry,
-        signer as Signer,
+        GeyserRegistry.address,
+        signer,
       )
 
       await geyserRegistry.register(geyser.address)
@@ -267,7 +271,7 @@ task('verify-geyser', 'verify and lock the Geyser template')
     const contract = await ethers.getContractAt(
       'Geyser',
       geyserTemplate,
-      signer as Signer,
+      signer,
     )
 
     console.log('Locking template')
